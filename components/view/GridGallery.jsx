@@ -1,10 +1,15 @@
-"use client";
-
 // wrapper around masonic's Masonry;
 // designed explicitly for /explore to browse routable crystals
 
-import { Masonry } from "masonic";
+"use client";
+
+import dynamic from "next/dynamic";
+// import { Masonry } from "masonic";
 import CrystalCardFeatured from "@/components/view/CrystalCardFeatured";
+
+const Masonry = dynamic(() => import("masonic").then((mod) => mod.Masonry), {
+  ssr: false,
+});
 
 const GridGallery = ({ data }) => {
   const columnWidth = 260;

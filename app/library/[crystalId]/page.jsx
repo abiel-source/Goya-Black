@@ -4,7 +4,7 @@ import Crystal from "@/models/Crystal";
 import Fragment from "@/models/Fragment";
 
 import LibraryCrystalMasonryGallery from "@/components/view/LibraryCrystalMasonryGallery";
-import SeedCrystalModal from "@/app/library/[crystalId]/SeedCrystalModal";
+// import SeedCrystalModal from "@/app/library/[crystalId]/SeedCrystalModal";
 
 export default async function CrystalLibraryPage({ params, searchParams }) {
   const { crystalId } = await params;

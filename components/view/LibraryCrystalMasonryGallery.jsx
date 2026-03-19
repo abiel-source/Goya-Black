@@ -7,6 +7,8 @@ import LibraryFragmentCard from "@/components/view/LibraryFragmentCard";
 import getCrystalFragments from "@/app/actions/library/getCrystalFragments";
 import SeedCrystalModal from "@/app/library/[crystalId]/SeedCrystalModal";
 
+import { Suspense } from "react"; // production build error
+
 const LibraryCrystalMasonryGallery = ({ crystalId, seed, crystal }) => {
   const columnWidth = 197;
   const columnGutter = 16;
@@ -83,13 +85,16 @@ const LibraryCrystalMasonryGallery = ({ crystalId, seed, crystal }) => {
               Add images
             </button>
           ) : (
-            <SeedCrystalModal
-              crystalId={crystalId}
-              openOnLoad={seed || (crystal.images?.length ?? 0) === 0}
-              onFragmentsAdded={handleFragmentsAdded}
-              crystalFragmentIds={fragments.map((f) => f._id)}
-              fragmentsUpdateLoading={fragmentsUpdateLoading}
-            />
+            // production build error fix
+            <Suspense fallback={null}>
+              <SeedCrystalModal
+                crystalId={crystalId}
+                openOnLoad={seed || (crystal.images?.length ?? 0) === 0}
+                onFragmentsAdded={handleFragmentsAdded}
+                crystalFragmentIds={fragments.map((f) => f._id)}
+                fragmentsUpdateLoading={fragmentsUpdateLoading}
+              />
+            </Suspense>
           )}
         </div>
       </div>

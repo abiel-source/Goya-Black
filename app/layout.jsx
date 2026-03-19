@@ -8,6 +8,8 @@ import FooterNav from "@/components/root/FooterNav";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "@/components/root/ToastProvider";
 
+import { Suspense } from "react"; // production build error fix
+
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -25,7 +27,10 @@ const RootLayout = ({ children }) => {
       <html lang="en">
         <body className={`${roboto_mono.className} antialiased`}>
           <div className="min-h-dvh flex flex-col">
-            <Header />
+            {/* build error fix */}
+            <Suspense fallback={null}>
+              <Header />
+            </Suspense>
 
             {/* Below-header region */}
             {/* min-h-0 allows children to shrink and scroll */}
