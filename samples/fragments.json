@@ -1,0 +1,212 @@
+[
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+
+    "name": "Test Image 1",
+    "tags": ["architecture", "nature"],
+    "description": "A scenic view of the city at night. A beautiful blend of nature and city architecture.",
+
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+
+    "image": {
+        "url": "https://cdn.pixabay.com/photo/2017/06/12/19/02/cat-2396473__480.jpg",
+        "width": null,
+        "height": null
+    },
+
+    "isFeatured": true,
+
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 2",
+    "tags": ["ambient"],
+    "description": "Soft ambient light across quiet streets.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2015/06/03/13/13/cats-796437__480.jpg", "width": null, "height": null },
+    "isFeatured": true,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 3",
+    "tags": ["urban", "night"],
+    "description": "A quiet street illuminated by city lights.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2012/11/26/13/58/cat-67345__480.jpg", "width": null, "height": null },
+    "isFeatured": true,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 4",
+    "tags": ["architecture"],
+    "description": "Modern buildings against a twilight sky.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2014/09/18/20/17/cat-451377__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 5",
+    "tags": ["nature"],
+    "description": "Trees framed by city silhouettes.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2015/01/31/12/36/cat-618470__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 6",
+    "tags": ["street", "urban"],
+    "description": "Empty sidewalks under soft neon glow.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2014/07/24/18/40/cat-401124__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 7",
+    "tags": ["skyline"],
+    "description": "A distant skyline fading into dusk.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 8",
+    "tags": ["reflection"],
+    "description": "Lights reflected on wet pavement.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2015/02/14/10/16/cat-636172__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 9",
+    "tags": ["minimal"],
+    "description": "A minimal urban composition.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2013/10/28/14/30/cat-201855__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  },
+  {
+    "ownerId": "1",
+    "crystalId": "1",
+    "name": "Test Image 10",
+    "tags": ["city"],
+    "description": "Buildings layered against the horizon.",
+    "location": {
+      "street": "240 16th St W",
+      "city": "North Vancouver",
+      "region": "BC",
+      "country": "Canada",
+      "postalCode": "V7M1T6"
+    },
+    "image": { "url": "https://cdn.pixabay.com/photo/2015/04/16/15/21/cat-725793__480.jpg", "width": null, "height": null },
+    "isFeatured": false,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z",
+    "likes": 0,
+    "views": 0
+  }
+]

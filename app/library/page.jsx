@@ -1,0 +1,185 @@
+import Link from "next/link";
+import connectDB from "@/config/database";
+import { randomBetween } from "@/utils/restructureData";
+import { getSessionUser } from "@/utils/getSessionUser";
+
+import User from "@/models/User";
+
+import CrystalGrid from "@/components/view/CrystalGrid";
+import MasonryGalleryNoHover from "@/components/view/MasonryGalleryNoHover";
+import LibraryCreatedFragmentsGallery from "@/components/stateful/LibraryCreatedFragmentsGallery";
+
+import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedCrystals";
+import getUserCreatedFragments from "@/app/actions/library/getUserCreatedFragments";
+import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedCrystals";
+import getUserExclusiveSavedFragments from "@/app/actions/library/getUserExclusiveSavedFragments";
+
+import CollapsibleSection from "@/components/view/CollapsibleSection";
+
+const LibraryPage = async ({ searchParams }) => {
+  const resolvedSearchParams = await searchParams;
+  const tab = resolvedSearchParams?.tab === "saved" ? "saved" : "created";
+
+  await connectDB();
+
+  // load profile
+  const sessionUser = await getSessionUser();
+  if (!sessionUser || !sessionUser.userId) {
+    // throw new Error("User ID is required");
+    return (
+      <div className="px-4 py-8">
+        <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+          Sign In to Create & Manage your own Crystal Collection
+        </h1>
+
+        <CollapsibleSection
+          isInitiallyOpen={true}
+          headerText="Benefits of Having Your Own Account:"
+        >
+          <p className="mt-4 p-2 text-center">
+            Create & Manage your own Fragments & Crystals Collection
+          </p>
+          <p className="mt-1 p-2 text-center">Unlock Full Search Features</p>
+          <p className="mt-1 p-2 text-center">
+            Participate in Any Comment Section
+          </p>
+          <p className="mt-1 p-2 text-center">Be Able to Message Other Users</p>
+          <p className="mt-1 p-2 text-center">
+            Gain Access to Personalized & Recommended Content Tailored to You!
+          </p>
+        </CollapsibleSection>
+
+        <CollapsibleSection
+          isInitiallyOpen={false}
+          headerText="How to Create an Account?"
+        >
+          <p className="mt-4 p-2 text-center">
+            Creating an account is made easy and secure via Google
+            Authentication. Click the Sign In button at the top-right to connect
+            your Google account to the application. Once authenticated, you gain
+            full feature access in minutes.
+          </p>
+        </CollapsibleSection>
+
+        <CollapsibleSection
+          isInitiallyOpen={false}
+          headerText="Why do we Require Registration for Full Feature Access?"
+        >
+          <p className="mt-4 p-2 text-center">
+            We require account registration for full feature access in order to
+            prevent server overload from illegitimate users. We reserve our most
+            expensive (backend) operations for good-spirited users like
+            yourself.
+          </p>
+        </CollapsibleSection>
+      </div>
+    );
+  }
+  const { userId } = sessionUser;
+
+  const userDoc = await User.findById(userId)
+    .select("username image email")
+    .lean();
+  const user = JSON.parse(JSON.stringify(userDoc));
+
+  // load data
+  const createdCrystals = await getUserCreatedCrystals(userId);
+  const savedCrystals = await getUserExclusiveSavedCrystals(userId);
+
+  const createdFragments = await getUserCreatedFragments(userId);
+  const savedFragments = await getUserExclusiveSavedFragments(userId);
+
+  const restructuredCreatedFragments = createdFragments.map((f) => {
+    const w = f?.image?.width;
+    const h = f?.image?.height;
+
+    return {
+      ...f,
+      ratio:
+        typeof w === "number" && typeof h === "number" && h > 0
+          ? w / h
+          : randomBetween(0.75, 1.8),
+    };
+  });
+
+  const restructuredSavedFragments = savedFragments.map((f) => {
+    const w = f?.image?.width;
+    const h = f?.image?.height;
+
+    return {
+      ...f,
+      ratio:
+        typeof w === "number" && typeof h === "number" && h > 0
+          ? w / h
+          : randomBetween(0.75, 1.8),
+    };
+  });
+
+  return (
+    <div className="px-4 py-8">
+      <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+        Your Crystal Collection
+      </h1>
+
+      {/* Switch between Created & Saved */}
+      <div className="mx-auto mb-8 flex w-fit rounded-xl border border-[#5D3FD3] bg-white/5">
+        <Link
+          href={`/library?tab=created`}
+          className={`rounded-lg px-4 py-2 text-sm transition ${
+            tab === "created" ? "bg-[#5D3FD3] text-white" : "text-white"
+          }`}
+        >
+          Created
+        </Link>
+
+        <Link
+          href={`/library?tab=saved`}
+          className={`rounded-lg px-6 py-2 text-sm transition ${
+            tab === "saved" ? "bg-[#5D3FD3] text-white" : "text-white"
+          }`}
+        >
+          Saved
+        </Link>
+      </div>
+
+      {tab === "created" ? (
+        <>
+          <h2 className="text-center font-bold mt-4">Created Crystals</h2>
+          {createdCrystals.length === 0 ? (
+            <p className="text-center mt-4">No created crystals to show</p>
+          ) : (
+            <CrystalGrid data={createdCrystals} />
+          )}
+
+          <h2 className="text-center font-bold mt-10">Created Fragments</h2>
+          {restructuredCreatedFragments.length === 0 ? (
+            <p className="text-center mt-4">No created fragments to show</p>
+          ) : (
+            // <MasonryGalleryNoHover data={restructuredCreatedFragments} />
+            <LibraryCreatedFragmentsGallery
+              initialRestructuredCreatedFragments={restructuredCreatedFragments}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          {/* <h2 className="text-center font-bold mt-4">Saved Crystals</h2>
+          {savedCrystals.length === 0 ? (
+            <p className="text-center mt-4">No saved crystals to show</p>
+          ) : (
+            <CrystalGrid data={savedCrystals} />
+          )} */}
+
+          <h2 className="text-center font-bold mt-10">Saved Fragments</h2>
+          {restructuredSavedFragments.length === 0 ? (
+            <p className="text-center mt-4">No saved fragments to show</p>
+          ) : (
+            <MasonryGalleryNoHover data={restructuredSavedFragments} />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default LibraryPage;
