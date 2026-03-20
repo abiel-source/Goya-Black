@@ -22,7 +22,7 @@ const CreateFragmentForm = () => {
 
   return (
     <form action={addFragment} className="w-full max-w-5xl mx-auto px-4">
-      <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+      <h1 className="text-center text-3xl font-bold mt-10 mb-10">
         Create Fragment
       </h1>
 

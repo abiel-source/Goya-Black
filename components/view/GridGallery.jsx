@@ -3,27 +3,31 @@
 
 "use client";
 
-import dynamic from "next/dynamic";
-// import { Masonry } from "masonic";
 import CrystalCardFeatured from "@/components/view/CrystalCardFeatured";
 
-const Masonry = dynamic(() => import("masonic").then((mod) => mod.Masonry), {
-  ssr: false,
-});
-
 const GridGallery = ({ data }) => {
-  const columnWidth = 260;
-  const columnGutter = 32;
-
   return (
-    <div className="p-2">
-      <Masonry
-        items={data}
-        columnGutter={columnGutter}
-        columnWidth={columnWidth}
-        overscanBy={6}
-        render={CrystalCardFeatured}
-      />
+    <div className="mx-auto w-full max-w-4xl px-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+        {data.map((crystal, index) => {
+          const isOddLength = data.length % 2 === 1;
+          const isLastItem = index === data.length - 1;
+          const shouldCenterLastCard = isOddLength && isLastItem;
+
+          return (
+            <div
+              key={crystal?._id || index}
+              className={`flex justify-center ${
+                shouldCenterLastCard ? "sm:col-span-2" : ""
+              }`}
+            >
+              <div className="w-full max-w-[320px] sm:max-w-none">
+                <CrystalCardFeatured data={crystal} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

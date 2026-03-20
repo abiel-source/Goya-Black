@@ -14,7 +14,7 @@ const CreateCrystalForm = () => {
 
   return (
     <form action={addEmptyCrystal} className="max-w-md mx-auto">
-      <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+      <h1 className="text-center text-3xl font-bold mt-10 mb-10">
         Create Crystal
       </h1>
 

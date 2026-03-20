@@ -117,7 +117,7 @@ const LibraryPage = async ({ searchParams }) => {
 
   return (
     <div className="px-4 py-8">
-      <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+      <h1 className="text-center text-3xl font-bold mt-10 mb-10">
         Your Crystal Collection
       </h1>
 

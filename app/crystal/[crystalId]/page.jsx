@@ -48,6 +48,9 @@ const CrystalPage = async ({ params }) => {
 
   return (
     <>
+      <h1 className="text-center text-2xl font-bold mt-10 mb-10">
+        {crystal.name}
+      </h1>
       <MasonryGallery data={restructuredFragments} />
     </>
   );
