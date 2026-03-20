@@ -20,7 +20,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
         href="/settings/about"
         role="menuitem"
         className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
-        onClick={toggleMenu("settings")}
+        onClick={() => toggleMenu("settings")}
       >
         About
       </Link>
@@ -29,7 +29,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
         href="/settings/features"
         role="menuitem"
         className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
-        onClick={toggleMenu("settings")}
+        onClick={() => toggleMenu("settings")}
       >
         Features & Developer Notes
       </Link>
@@ -47,7 +47,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
         href="/settings/policy"
         role="menuitem"
         className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
-        onClick={toggleMenu("settings")}
+        onClick={() => toggleMenu("settings")}
       >
         Privacy Policy
       </Link>

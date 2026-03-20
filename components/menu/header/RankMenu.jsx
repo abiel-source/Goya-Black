@@ -39,7 +39,7 @@ const RankMenu = ({ toggleMenu }) => {
         href="/settings/features"
         role="menuitem"
         className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
-        onClick={toggleMenu("rank")}
+        onClick={() => toggleMenu("rank")}
       >
         Learn more
       </Link>
