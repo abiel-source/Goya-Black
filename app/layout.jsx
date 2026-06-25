@@ -1,4 +1,4 @@
-import { Roboto_Mono } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "@/assets/styles/globals.css";
 import AuthProvider from "@/components/auth/AuthProvider";
 import Header from "@/components/root/Header";
@@ -10,7 +10,7 @@ import ToastProvider from "@/components/root/ToastProvider";
 
 import { Suspense } from "react"; // production build error fix
 
-const roboto_mono = Roboto_Mono({
+const dm_sans = DM_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -25,7 +25,7 @@ const RootLayout = ({ children }) => {
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={`${roboto_mono.className} antialiased`}>
+        <body className={`${dm_sans.className} antialiased`}>
           <div className="min-h-dvh flex flex-col">
             {/* build error fix */}
             <Suspense fallback={null}>
