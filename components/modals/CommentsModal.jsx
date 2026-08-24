@@ -29,14 +29,14 @@ export default function CommentsModal({ open, onClose, fragmentId, imgSrc }) {
 
       {/* Modal shell */}
       <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-6">
-        <div className="relative w-full max-w-6xl h-[85vh] rounded-2xl border border-white/10 bg-black shadow-xl overflow-hidden flex flex-col">
+        <div className="relative w-full max-w-6xl h-[85vh] rounded-2xl border border-[#E5E7EB] bg-white shadow-xl overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-            <div className="text-white font-semibold">Comments</div>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E7EB]">
+            <div className="text-[#111111] font-semibold">Comments</div>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg px-3 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 transition"
+              className="rounded-lg px-3 py-1.5 text-sm text-zinc-400 hover:text-[#111111] hover:bg-zinc-100 transition"
             >
               Close
             </button>
