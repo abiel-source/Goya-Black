@@ -40,14 +40,14 @@ const CrystalCard = ({ data, style, width }) => {
 
   return (
     <div style={style}>
-      <div className="flex flex-col bg-black overflow-hidden w-full">
+      <div className="flex flex-col overflow-hidden w-full">
         <Link href={`/library/${crystalId}`} className="block w-full">
           <div
-            className="relative w-full rounded-lg overflow-hidden bg-white/5 border border-white/10"
+            className="relative w-full rounded-lg overflow-hidden bg-zinc-100 border border-[#E5E7EB]"
             style={{ aspectRatio: 1.25, minHeight: 120 }}
           >
             {loadingCoverImg ? (
-              <div className="absolute inset-0 grid place-items-center text-xs text-white/60">
+              <div className="absolute inset-0 grid place-items-center text-xs text-zinc-400">
                 Loading...
               </div>
             ) : coverImg ? (
@@ -60,14 +60,14 @@ const CrystalCard = ({ data, style, width }) => {
                 priority={false}
               />
             ) : (
-              <div className="absolute inset-0 grid place-items-center text-xs text-white/60">
+              <div className="absolute inset-0 grid place-items-center text-xs text-zinc-400">
                 No cover yet
               </div>
             )}
           </div>
 
           <div className="p-2">
-            <span className="text-sm text-white">{name}</span>
+            <span className="text-sm text-[#111111]">{name}</span>
           </div>
         </Link>
       </div>

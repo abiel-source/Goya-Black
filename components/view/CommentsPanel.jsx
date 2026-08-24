@@ -223,29 +223,27 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
   return (
     <div className="h-full min-h-0 grid grid-cols-1 md:grid-cols-2">
       {/* LEFT */}
-      <div className="relative w-full h-full bg-black">
+      <div className="relative w-full h-full bg-zinc-100">
         {imgSrc ? (
           <Image src={imgSrc} alt="Fragment" fill className="object-contain" />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-white/60">
+          <div className="absolute inset-0 flex items-center justify-center text-zinc-400">
             No image
           </div>
         )}
       </div>
 
       {/* RIGHT */}
-      <div className="flex flex-col h-full min-h-0 border-l border-white/10 bg-black">
-        <div className="px-4 py-3 border-b border-white/10 text-white font-semibold">
+      <div className="flex flex-col h-full min-h-0 border-l border-[#E5E7EB] bg-white">
+        <div className="px-4 py-3 border-b border-[#E5E7EB] text-[#111111] font-semibold">
           Comments
         </div>
 
         <div className="flex-1 min-h-0 overflow-auto px-4 py-3 space-y-4">
           {loadingThreads ? (
-            <div className="text-sm text-white/60">Loading...</div>
+            <div className="text-sm text-zinc-400">Loading...</div>
           ) : rowList.length === 0 ? (
-            <div className="text-sm text-white/60">
-              Be the first to comment.
-            </div>
+            <div className="text-sm text-zinc-400">Be the first to comment.</div>
           ) : (
             rowList.map(({ thread, topComment }) => {
               const threadId = thread?._id?.toString?.() ?? thread?._id;
@@ -256,7 +254,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
               const replies = cached.filter((c) => c.kind === "reply");
 
               return (
-                <div key={threadId} className="border-b border-white/10 pb-3">
+                <div key={threadId} className="border-b border-[#E5E7EB] pb-3">
                   <Comment
                     comment={topComment}
                     indent={0}
@@ -266,22 +264,20 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
                     )}
                   />
 
-                  <div className="mt-1 flex items-center gap-3 text-xs text-white/50">
+                  <div className="mt-1 flex items-center gap-3 text-xs text-zinc-400">
                     {thread?.replyCount > 0 && (
                       <button
                         type="button"
-                        className="hover:text-white transition"
+                        className="hover:text-[#2D6A4F] transition-colors duration-150"
                         onClick={() => toggleReplies(threadId)}
                       >
-                        {expanded
-                          ? "Hide replies"
-                          : `View ${thread.replyCount} replies`}
+                        {expanded ? "Hide replies" : `View ${thread.replyCount} replies`}
                       </button>
                     )}
 
                     <button
                       type="button"
-                      className="hover:text-white transition"
+                      className="hover:text-[#2D6A4F] transition-colors duration-150"
                       onClick={() => setReplyToThreadId(threadId)}
                     >
                       Reply
@@ -291,13 +287,9 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
                   {expanded && (
                     <div className="mt-2">
                       {loadingReplies ? (
-                        <div className="text-xs text-white/60 pl-4">
-                          Loading replies...
-                        </div>
+                        <div className="text-xs text-zinc-400 pl-4">Loading replies...</div>
                       ) : replies.length === 0 ? (
-                        <div className="text-xs text-white/60 pl-4">
-                          No replies yet.
-                        </div>
+                        <div className="text-xs text-zinc-400 pl-4">No replies yet.</div>
                       ) : (
                         <div className="space-y-1">
                           {replies.map((r) => {
@@ -323,13 +315,13 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
         </div>
 
         {/* Composer */}
-        <div className="border-t border-white/10 p-3">
+        <div className="border-t border-[#E5E7EB] p-3">
           {replyToThreadId && (
-            <div className="mb-2 flex items-center justify-between text-xs text-white/60">
+            <div className="mb-2 flex items-center justify-between text-xs text-zinc-400">
               <span>Replying in thread</span>
               <button
                 type="button"
-                className="hover:text-white transition"
+                className="hover:text-[#111111] transition-colors duration-150"
                 onClick={() => setReplyToThreadId(null)}
               >
                 Cancel
@@ -341,13 +333,11 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
             <input
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
-              placeholder={
-                replyToThreadId ? "Write a reply..." : "Add a comment..."
-              }
+              placeholder={replyToThreadId ? "Write a reply..." : "Add a comment..."}
               className="
-                flex-1 rounded-xl bg-white/5 border border-white/10
-                px-3 py-2 text-sm text-white placeholder:text-white/40
-                outline-none focus:border-[#5D3FD3]
+                flex-1 rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
+                px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
+                outline-none focus:border-[#2D6A4F]
               "
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -360,8 +350,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
               type="button"
               onClick={handleSend}
               disabled={sending || draft.trim().length === 0}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-              style={{ backgroundColor: "#5D3FD3" }}
+              className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#2D6A4F] hover:bg-[#235C43] disabled:opacity-50 transition-colors duration-150"
             >
               {sending ? "Posting..." : "Post"}
             </button>

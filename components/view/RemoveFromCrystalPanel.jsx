@@ -70,7 +70,7 @@ const RemoveFromCrystalPanel = ({
             text-white
             rounded-md
             disabled:opacity-50"
-        style={{ backgroundColor: "#5D3FD3" }}
+        style={{ backgroundColor: "#6B7280" }}
         aria-label="Confirm Removal from Crystal"
         title="Confirm Removal from Crystal"
       >

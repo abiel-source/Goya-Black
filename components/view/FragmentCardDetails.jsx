@@ -32,7 +32,7 @@ import AddToCrystalModal from "@/components/modals/AddToCrystalModal";
 
 import { Heart, Eye, Share, MessageCircle, GemIcon } from "lucide-react";
 
-const ACCENT = "#5D3FD3";
+const ACCENT = "#2D6A4F";
 
 const formatDate = (iso) => {
   if (!iso) return "";
@@ -265,13 +265,13 @@ const FragmentCardDetails = ({
     <div style={style} className="w-full">
       {/* FIXED HEIGHT TOP CARD */}
       <div
-        className="flex w-full flex-col rounded-t-lg bg-black border border-white/10 overflow-hidden"
+        className="flex w-full flex-col rounded-t-lg bg-white border border-[#E5E7EB] overflow-hidden"
         style={{ height: fixedMediaHeight }}
       >
         {/* Creator header */}
-        <div className="flex items-center gap-3 px-3 py-3 border-b border-white/10 shrink-0">
+        <div className="flex items-center gap-3 px-3 py-3 border-b border-[#E5E7EB] shrink-0">
           {/* creator avatar picture */}
-          <div className="relative h-9 w-9 rounded-full overflow-hidden bg-white/10">
+          <div className="relative h-9 w-9 rounded-full overflow-hidden bg-zinc-100">
             {creatorAvatar ? (
               <Link
                 href={
@@ -289,7 +289,7 @@ const FragmentCardDetails = ({
                 />
               </Link>
             ) : (
-              <div className="h-full w-full flex items-center justify-center text-xs text-white/70">
+              <div className="h-full w-full flex items-center justify-center text-xs text-zinc-400">
                 {creatorName
                   .split(" ")
                   .slice(0, 2)
@@ -307,12 +307,12 @@ const FragmentCardDetails = ({
                   : `/profile/${creatorId}?tab=created`
               }
             >
-              <div className="text-sm text-white font-medium truncate">
+              <div className="text-sm text-[#111111] font-medium truncate">
                 {creatorName}
               </div>
             </Link>
 
-            <div className="text-xs text-white/60 truncate">
+            <div className="text-xs text-zinc-400 truncate">
               {name || "Untitled fragment"}
             </div>
           </div>
@@ -329,50 +329,50 @@ const FragmentCardDetails = ({
               className="object-cover"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-white/60">
+            <div className="w-full h-full flex items-center justify-center text-zinc-400">
               No image
             </div>
           )}
         </div>
 
         {/* Icon bar */}
-        <div className="flex items-center justify-between px-3 py-2 border-t border-white/10 shrink-0">
+        <div className="flex items-center justify-between px-3 py-2 border-t border-[#E5E7EB] shrink-0">
           {/* left cluster */}
           <div className="flex items-center gap-4">
             <button
               onClick={handleToggleLike}
-              className="flex items-center gap-1 text-white/90 hover:text-white transition"
+              className="flex items-center gap-1 text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150"
             >
               <Heart
                 size={20}
                 strokeWidth={1.75}
-                className={isLiked ? "fill-[#5D3FD3] stroke-[#5D3FD3]" : ""}
+                className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : ""}
               />
               {!loadingMetrics ? (
-                <span className="text-xs text-white/90">{likeCount}</span>
+                <span className="text-xs">{likeCount}</span>
               ) : (
-                <span className="text-xs text-white/90">...</span>
+                <span className="text-xs">...</span>
               )}
             </button>
 
-            <div className="flex items-center gap-1 text-white/90">
+            <div className="flex items-center gap-1 text-zinc-500">
               <Eye size={20} strokeWidth={1.75} />
               {!loadingMetrics ? (
-                <span className="text-xs text-white/90">{viewCount}</span>
+                <span className="text-xs">{viewCount}</span>
               ) : (
-                <span className="text-xs text-white/90">...</span>
+                <span className="text-xs">...</span>
               )}
             </div>
 
             <button
               onClick={() => setMessagesOpen(true)}
-              className="flex items-center gap-1 text-white/90 hover:text-white transition"
+              className="flex items-center gap-1 text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150"
             >
               <MessageCircle size={20} strokeWidth={1.75} />
               {!loadingMetrics ? (
-                <span className="text-xs text-white/90">{commentCount}</span>
+                <span className="text-xs">{commentCount}</span>
               ) : (
-                <span className="text-xs text-white/90">...</span>
+                <span className="text-xs">...</span>
               )}
             </button>
 
@@ -425,9 +425,9 @@ const FragmentCardDetails = ({
       </div>
 
       {/* VARIABLE HEIGHT BOTTOM SECTION */}
-      <div className="rounded-b-lg border-x border-b border-white/10 bg-black px-3 pt-2 pb-3">
+      <div className="rounded-b-lg border-x border-b border-[#E5E7EB] bg-white px-3 pt-2 pb-3">
         {createdAt && (
-          <div className="text-xs text-white/60 mb-2">
+          <div className="text-xs text-zinc-400 mb-2">
             {formatDate(createdAt)}
           </div>
         )}
@@ -440,7 +440,7 @@ const FragmentCardDetails = ({
           >
             <p
               className={[
-                "text-sm text-white/90 leading-relaxed",
+                "text-sm text-zinc-700 leading-relaxed",
                 descExpanded ? "" : "line-clamp-1",
               ].join(" ")}
             >
@@ -451,7 +451,7 @@ const FragmentCardDetails = ({
             </div>
           </button>
         ) : (
-          <div className="text-sm text-white/60">No description.</div>
+          <div className="text-sm text-zinc-400">No description.</div>
         )}
       </div>
     </div>

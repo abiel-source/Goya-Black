@@ -254,33 +254,33 @@ export default function MessagesPanel() {
   return (
     <div className="h-full min-h-0 grid grid-cols-1 md:grid-cols-[340px_1fr]">
       {/* LEFT */}
-      <div className="border-b md:border-b-0 md:border-r border-white/10 bg-black flex flex-col min-h-0">
+      <div className="border-b md:border-b-0 md:border-r border-[#E5E7EB] bg-white flex flex-col min-h-0">
         {/* Search */}
-        <div className="p-3 border-b border-white/10">
+        <div className="p-3 border-b border-[#E5E7EB]">
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search people..."
             className="
-              w-full rounded-xl bg-black border border-white/10
-              px-3 py-2 text-sm text-white placeholder:text-white/40
-              outline-none focus:border-[#5D3FD3]/90
+              w-full rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
+              px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
+              outline-none focus:border-[#2D6A4F]
+              transition-colors duration-150
             "
           />
-          <div className="mt-2 text-xs text-white/50">
+          <div className="mt-2 text-xs text-zinc-400">
             Search users to start or resume a chat.
           </div>
         </div>
 
         {/* Scrollable list area */}
         <div className="flex-1 min-h-0 overflow-auto">
-          {/* User search results */}
           {showUserSearch ? (
             <div className="p-2">
               {loadingUsers ? (
-                <div className="p-3 text-sm text-white/60">Searching...</div>
+                <div className="p-3 text-sm text-zinc-400">Searching...</div>
               ) : userResults.length === 0 ? (
-                <div className="p-3 text-sm text-white/60">No users found.</div>
+                <div className="p-3 text-sm text-zinc-400">No users found.</div>
               ) : (
                 <ul className="space-y-1">
                   {userResults.map((u) => (
@@ -288,12 +288,10 @@ export default function MessagesPanel() {
                       <button
                         type="button"
                         onClick={() => openChatWithUser(u)}
-                        className="w-full rounded-xl px-3 py-2 text-left hover:bg-white/5 transition"
+                        className="w-full rounded-xl px-3 py-2 text-left hover:bg-zinc-50 transition-colors duration-150"
                       >
-                        <div className="text-sm text-white">{u.username}</div>
-                        <div className="text-xs text-white/50 truncate">
-                          Open chat
-                        </div>
+                        <div className="text-sm text-[#111111]">{u.username}</div>
+                        <div className="text-xs text-zinc-400 truncate">Open chat</div>
                       </button>
                     </li>
                   ))}
@@ -301,20 +299,16 @@ export default function MessagesPanel() {
               )}
             </div>
           ) : (
-            // Inbox list
             <div className="p-2">
               {loadingConvos ? (
-                <div className="p-3 text-sm text-white/60">Loading...</div>
+                <div className="p-3 text-sm text-zinc-400">Loading...</div>
               ) : convoList.length === 0 ? (
-                <div className="p-3 text-sm text-white/60">
-                  No conversations yet.
-                </div>
+                <div className="p-3 text-sm text-zinc-400">No conversations yet.</div>
               ) : (
                 <ul className="space-y-1">
                   {convoList.map((c) => {
                     const id = c?._id?.toString?.() ?? c?._id;
                     const active = id === activeConversationId;
-
                     const other = getOtherUserFromConvo(c);
                     const title = other?.username || "Conversation";
 
@@ -323,13 +317,12 @@ export default function MessagesPanel() {
                         <button
                           type="button"
                           onClick={() => openConversation(c)}
-                          className={`
-                            w-full text-left rounded-xl px-3 py-2 transition
-                            ${active ? "bg-white/10" : "hover:bg-white/5"}
-                          `}
+                          className={`w-full text-left rounded-xl px-3 py-2 transition-colors duration-150 ${
+                            active ? "bg-[#2D6A4F]/10" : "hover:bg-zinc-50"
+                          }`}
                         >
-                          <div className="text-sm text-white">{title}</div>
-                          <div className="text-xs text-white/50 truncate">
+                          <div className="text-sm text-[#111111]">{title}</div>
+                          <div className="text-xs text-zinc-400 truncate">
                             {c.lastMessagePreview || "No messages yet"}
                           </div>
                         </button>
@@ -344,12 +337,12 @@ export default function MessagesPanel() {
       </div>
 
       {/* RIGHT */}
-      <div className="bg-black flex flex-col min-h-0">
+      <div className="bg-white flex flex-col min-h-0">
         {!activeOtherUser && !activeConversationId ? (
           <div className="h-full grid place-items-center p-6">
             <div className="text-center">
-              <div className="text-white font-semibold">Select a chat</div>
-              <div className="mt-2 text-sm text-white/60 max-w-md">
+              <div className="text-[#111111] font-semibold">Select a chat</div>
+              <div className="mt-2 text-sm text-zinc-400 max-w-md">
                 Search for a user on the left to start a conversation.
               </div>
             </div>
@@ -357,27 +350,22 @@ export default function MessagesPanel() {
         ) : (
           <div className="h-full flex flex-col min-h-0">
             {/* Thread header */}
-            <div className="px-4 py-3 border-b border-white/10">
-              <div className="text-white font-semibold">
+            <div className="px-4 py-3 border-b border-[#E5E7EB]">
+              <div className="text-[#111111] font-semibold">
                 {activeOtherUser?.username || "Conversation"}
               </div>
-              <div className="text-xs text-white/50">
+              <div className="text-xs text-zinc-400">
                 {activeConversationId ? "Active thread" : "New message"}
               </div>
             </div>
 
             {/* Messages (scrollable) */}
-            <div
-              ref={messagesEndRef}
-              className="flex-1 min-h-0 overflow-auto p-4"
-            >
+            <div ref={messagesEndRef} className="flex-1 min-h-0 overflow-auto p-4">
               {activeConversationId ? (
                 loadingMessages ? (
-                  <div className="text-sm text-white/60">
-                    Loading messages...
-                  </div>
+                  <div className="text-sm text-zinc-400">Loading messages...</div>
                 ) : messages.length === 0 ? (
-                  <div className="text-sm text-white/60">No messages yet.</div>
+                  <div className="text-sm text-zinc-400">No messages yet.</div>
                 ) : (
                   <div className="space-y-2">
                     {messages.map((m) => {
@@ -386,21 +374,13 @@ export default function MessagesPanel() {
                         (myId?.toString?.() ?? myId);
 
                       return (
-                        <div
-                          key={m._id}
-                          className={`flex ${
-                            mine ? "justify-end" : "justify-start"
-                          }`}
-                        >
+                        <div key={m._id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>
                           <div
-                            className={`
-                              max-w-[75%] rounded-2xl px-3 py-2 text-sm
-                              ${
-                                mine
-                                  ? "bg-[#5D3FD3] text-white"
-                                  : "bg-white/10 text-white"
-                              }
-                            `}
+                            className={`max-w-[75%] rounded-2xl px-3 py-2 text-sm ${
+                              mine
+                                ? "bg-[#2D6A4F] text-white"
+                                : "bg-zinc-100 text-[#111111]"
+                            }`}
                           >
                             {m.text}
                           </div>
@@ -410,23 +390,22 @@ export default function MessagesPanel() {
                   </div>
                 )
               ) : (
-                <div className="text-sm text-white/60">
-                  Say hi to start the conversation.
-                </div>
+                <div className="text-sm text-zinc-400">Say hi to start the conversation.</div>
               )}
             </div>
 
-            {/* Composer (fixed at bottom, never scrolls out) */}
-            <div className="p-3 border-t border-white/10">
+            {/* Composer */}
+            <div className="p-3 border-t border-[#E5E7EB]">
               <div className="flex gap-2">
                 <input
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   placeholder="Type a message..."
                   className="
-                    flex-1 rounded-xl bg-white/5 border border-white/10
-                    px-3 py-2 text-sm text-white placeholder:text-white/40
-                    outline-none focus:border-white/20
+                    flex-1 rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
+                    px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
+                    outline-none focus:border-[#2D6A4F]
+                    transition-colors duration-150
                   "
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
@@ -439,18 +418,14 @@ export default function MessagesPanel() {
                   type="button"
                   onClick={handleSend}
                   disabled={sending || draft.trim().length === 0}
-                  className="
-                    rounded-xl px-4 py-2 text-sm font-medium text-white
-                    disabled:opacity-50
-                  "
-                  style={{ backgroundColor: "#5D3FD3" }}
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#2D6A4F] hover:bg-[#235C43] disabled:opacity-50 transition-colors duration-150"
                 >
                   {sending ? "Sending..." : "Send"}
                 </button>
               </div>
 
               {!activeConversationId && (
-                <div className="mt-2 text-xs text-white/40">
+                <div className="mt-2 text-xs text-zinc-400">
                   Conversation will be created when you send your first message.
                 </div>
               )}

@@ -103,16 +103,16 @@ const SearchPanel = ({ query, setQuery }) => {
       <div className="flex-1 overflow-auto p-4">
         {isEmptyQuery ? (
           loadingDefaultState && !defaultStateLoaded ? (
-            <div className="text-white/60 text-sm">Loading...</div>
+            <div className="text-zinc-400 text-sm">Loading...</div>
           ) : (
             <div className="space-y-6">
               <section>
-                <h2 className="mb-3 text-sm font-semibold text-white/80">
+                <h2 className="mb-3 text-sm font-semibold text-zinc-600 font-medium">
                   Recommended Crystals
                 </h2>
 
                 {recommendedCrystals.length === 0 ? (
-                  <div className="text-white/60 text-sm">
+                  <div className="text-zinc-400 text-sm">
                     {myId
                       ? "No recommended crystals yet."
                       : "Sign in to get recommendations."}
@@ -135,7 +135,7 @@ const SearchPanel = ({ query, setQuery }) => {
                           />
                         )}
 
-                        <div className="rounded-lg px-3 py-2 text-white bg-white/5">
+                        <div className="rounded-lg px-3 py-2 text-[#111111] bg-zinc-50 hover:bg-zinc-100 rounded-lg transition-colors duration-150">
                           {crystal.name || "Untitled Crystal"}
                         </div>
                       </Link>
@@ -145,12 +145,12 @@ const SearchPanel = ({ query, setQuery }) => {
               </section>
 
               <section>
-                <h2 className="mb-3 text-sm font-semibold text-white/80">
+                <h2 className="mb-3 text-sm font-semibold text-zinc-600 font-medium">
                   Similar Users
                 </h2>
 
                 {similarUsers.length === 0 ? (
-                  <div className="text-white/60 text-sm">
+                  <div className="text-zinc-400 text-sm">
                     {myId
                       ? "No similar users yet."
                       : "Sign in to see similar users."}
@@ -174,7 +174,7 @@ const SearchPanel = ({ query, setQuery }) => {
                         ) : (
                           <User size={28} strokeWidth={1.75} />
                         )}
-                        <div className="rounded-lg px-3 py-2 text-white bg-white/5">
+                        <div className="rounded-lg px-3 py-2 text-[#111111] bg-zinc-50 hover:bg-zinc-100 rounded-lg transition-colors duration-150">
                           {user.username || "Unknown User"}
                         </div>
                       </Link>
@@ -185,9 +185,9 @@ const SearchPanel = ({ query, setQuery }) => {
             </div>
           )
         ) : loadingPredictions ? (
-          <div className="text-white/60 text-sm">Loading...</div>
+          <div className="text-zinc-400 text-sm">Loading...</div>
         ) : predictions.length === 0 ? (
-          <div className="text-white/60 text-sm">No suggestions</div>
+          <div className="text-zinc-400 text-sm">No suggestions</div>
         ) : (
           <div className="space-y-2">
             {predictions.map((prediction) => (
