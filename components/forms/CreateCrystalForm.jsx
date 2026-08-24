@@ -22,7 +22,7 @@ const CreateCrystalForm = () => {
       <div className="flex flex-col gap-4">
         {/* Name */}
         <div>
-          <label className="block text-gray-400 font-bold mb-2">
+          <label className="block text-[#111111] font-bold mb-2">
             Crystal Name
           </label>
           <input
@@ -35,8 +35,8 @@ const CreateCrystalForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#5D3FD3]
-              focus:ring-1 focus:ring-[#5D3FD3]
+              focus:border-[#2D6A4F]
+              focus:ring-1 focus:ring-[#2D6A4F]
               transition
             "
             placeholder="eg. Neon Nights in Vancouver"
@@ -46,7 +46,7 @@ const CreateCrystalForm = () => {
 
         {/* Description */}
         <div>
-          <label className="block text-gray-400 font-bold mb-2">
+          <label className="block text-[#111111] font-bold mb-2">
             Description
           </label>
           <textarea
@@ -59,8 +59,8 @@ const CreateCrystalForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#5D3FD3]
-              focus:ring-1 focus:ring-[#5D3FD3]
+              focus:border-[#2D6A4F]
+              focus:ring-1 focus:ring-[#2D6A4F]
               transition
               resize-none
             "
@@ -84,7 +84,7 @@ const CreateCrystalForm = () => {
             className={`
               relative inline-flex h-6 w-11 items-center rounded-full
               transition-colors duration-200
-              ${isPrivate ? "bg-[#5D3FD3]" : "bg-gray-300"}
+              ${isPrivate ? "bg-[#2D6A4F]" : "bg-gray-300"}
             `}
           >
             <span
@@ -111,8 +111,8 @@ const CreateCrystalForm = () => {
           <button
             type="submit"
             className="
-              bg-[#5D3FD3]
-              hover:bg-[#4c32b0]
+              bg-[#2D6A4F]
+              hover:bg-[#235C43]
               text-white
               font-bold
               py-3 px-4
@@ -130,7 +130,7 @@ const CreateCrystalForm = () => {
               toast.error("You must be signed in to create a crystal")
             }
             className="
-        bg-[#5D3FD3]/50
+        bg-[#2D6A4F]/50
         text-white
         font-bold
         py-3 px-4
