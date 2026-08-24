@@ -61,11 +61,11 @@ const ProfilePage = async ({ params, searchParams }) => {
     <div className="px-4 py-8">
       <h1 className="text-center text-2xl font-bold mb-6">{user.username}</h1>
 
-      <div className="mx-auto mb-8 flex w-fit rounded-xl border border-[#5D3FD3] bg-white/5">
+      <div className="mx-auto mb-8 flex w-fit rounded-xl border border-[#E5E7EB] bg-white">
         <Link
           href={`/profile/${profileId}?tab=created`}
           className={`rounded-lg px-4 py-2 text-sm transition ${
-            tab === "created" ? "bg-[#5D3FD3] text-white" : "text-white"
+            tab === "created" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
           }`}
         >
           Created
@@ -74,7 +74,7 @@ const ProfilePage = async ({ params, searchParams }) => {
         <Link
           href={`/profile/${profileId}?tab=saved`}
           className={`rounded-lg px-6 py-2 text-sm transition ${
-            tab === "saved" ? "bg-[#5D3FD3] text-white" : "text-white"
+            tab === "saved" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
           }`}
         >
           Saved

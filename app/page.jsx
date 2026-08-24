@@ -154,13 +154,13 @@ const HomePage = () => {
       <div ref={sentinelRef} className="h-16 w-full" />
 
       {loadingMore && (
-        <p className="py-6 text-center text-sm text-white/70">
+        <p className="py-6 text-center text-sm text-zinc-400">
           Loading more...
         </p>
       )}
 
       {!hasMore && items.length > 0 && (
-        <p className="py-6 text-center text-sm text-white/50">
+        <p className="py-6 text-center text-sm text-zinc-300">
           No more fragments.
         </p>
       )}
