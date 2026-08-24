@@ -14,7 +14,7 @@ import HeaderProfileMenu from "@/components/menu/header/HeaderProfileMenu";
 import SearchModal from "@/components/modals/SearchModal";
 
 const iconBtn =
-  "inline-flex h-9 items-center justify-center rounded-lg text-white hover:bg-white/10 transition";
+  "inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -23,15 +23,11 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [providers, setProviders] = useState(null);
 
-  // Pattern: single state controls which dropdown is open
-  // null | "rank" | "settings" | "profile"
   const [activeMenu, setActiveMenu] = useState(null);
 
-  // search bar modal/dropdown
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
 
-  // refs for each dropdown wrapper
   const rankMenuRef = useRef(null);
   const settingsMenuRef = useRef(null);
   const profileMenuRef = useRef(null);
@@ -55,13 +51,10 @@ const Header = () => {
 
   const handleSearchSubmit = () => {
     const trimmed = query.trim();
-
     if (!trimmed) return;
-
     router.push(`/search?q=${encodeURIComponent(trimmed)}`);
   };
 
-  // sync search input + modal state to URL parameters
   useEffect(() => {
     const q = searchParams.get("q")?.trim();
     const crystalId = searchParams.get("crystal")?.trim();
@@ -89,20 +82,15 @@ const Header = () => {
 
     const handleClickOutside = (e) => {
       if (!activeMenu) return;
-
       const activeRef = menuRefs[activeMenu];
       const el = activeRef?.current;
-
-      if (el && !el.contains(e.target)) {
-        setActiveMenu(null);
-      }
+      if (el && !el.contains(e.target)) setActiveMenu(null);
     };
 
     const onKeyDown = (e) => {
       if (e.key === "Escape") setActiveMenu(null);
     };
 
-    // use "click" instead of "mousedown"
     document.addEventListener("click", handleClickOutside);
     document.addEventListener("keydown", onKeyDown);
 
@@ -113,20 +101,19 @@ const Header = () => {
     };
   }, [activeMenu, menuRefs]);
 
-  // Close dropdowns on route change (usually feels right)
   useEffect(() => {
     setActiveMenu(null);
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-zinc-900 bg-black">
+    <header className="sticky top-0 z-50 h-16 border-b border-[#E5E7EB] bg-white">
       <div className="flex h-full w-full items-center justify-between px-4">
         {/* Logo + Search */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Logo */}
           <Link
             href="/"
-            className="px-1.5 flex items-center text-xs font-semibold text-white"
+            className="flex items-center gap-2 text-sm font-semibold text-[#111111] tracking-tight"
           >
             <Image
               src="/CrystalClearLogo.svg"
@@ -134,59 +121,46 @@ const Header = () => {
               width={20}
               height={18}
             />
+            <span className="hidden sm:inline">Crystal Clear</span>
           </Link>
 
-          {/* Mobile Search Icon */}
-          {/* <button
-            type="button"
-            aria-label="SEARCH"
-            onClick={() => setSearchOpen(true)}
-            className="
-                      inline-flex h-9 w-9 items-center justify-center
-                      rounded-lg text-white hover:bg-white/10 transition md:hidden"
-          >
-            <Search size={20} strokeWidth={1.75} />
-          </button> */}
-
           {/* Search Bar */}
-          <div className="flex items-center">
-            <div className="relative">
-              <input
-                type="search"
-                placeholder="search..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onFocus={() => setSearchOpen(true)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleSearchSubmit();
-                  }
-                }}
-                className="
-                  h-9 sm:w-sm md:w-lg lg:w-2xl
-                  rounded-lg border border-zinc-800 bg-black
-                  pl-3 ml-2 pr-10 text-sm text-white
-                  placeholder:text-white/40
-                  outline-none
-                  focus:border-[#5D3FD3]
-                "
-              />
-              <button
-                type="button"
-                aria-label="Search"
-                onClick={handleSearchSubmit}
-                className="
-                  absolute right-1 top-1
-                  inline-flex h-7 w-7 items-center justify-center
-                  rounded-md text-white/80
-                  hover:bg-white/10 hover:text-white
-                  transition
-                "
-              >
-                <Search size={20} strokeWidth={1.75} />
-              </button>
-            </div>
+          <div className="relative ml-2">
+            <input
+              type="search"
+              placeholder="Search photos, collections..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setSearchOpen(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  handleSearchSubmit();
+                }
+              }}
+              className="
+                h-9 w-48 sm:w-64 md:w-80 lg:w-96
+                rounded-lg border border-[#E5E7EB] bg-[#F9F9F7]
+                pl-3 pr-10 text-sm text-[#111111]
+                placeholder:text-zinc-400
+                outline-none
+                focus:border-[#2D6A4F] focus:bg-white
+                transition-colors duration-150
+              "
+            />
+            <button
+              type="button"
+              aria-label="Search"
+              onClick={handleSearchSubmit}
+              className="
+                absolute right-1 top-1
+                inline-flex h-7 w-7 items-center justify-center
+                rounded-md text-zinc-400 hover:text-[#2D6A4F]
+                transition-colors duration-150
+              "
+            >
+              <Search size={16} strokeWidth={1.75} />
+            </button>
           </div>
 
           <SearchModal
@@ -199,13 +173,12 @@ const Header = () => {
 
         {/* top-right controls logged IN */}
         {session && (
-          <nav className="relative flex items-center gap-5">
-            {/* RANK dropdown wrapper */}
+          <nav className="relative flex items-center gap-1">
             <div className="relative" ref={rankMenuRef}>
               <button
                 type="button"
-                title="RANK"
-                aria-label="RANK"
+                title="Rank"
+                aria-label="Rank"
                 aria-haspopup="menu"
                 aria-expanded={activeMenu === "rank"}
                 onClick={() => toggleMenu("rank")}
@@ -213,16 +186,14 @@ const Header = () => {
               >
                 <ShieldHalf size={20} strokeWidth={1.75} />
               </button>
-
               {activeMenu === "rank" && <RankMenu toggleMenu={toggleMenu} />}
             </div>
 
-            {/* SETTINGS dropdown wrapper */}
             <div className="relative" ref={settingsMenuRef}>
               <button
                 type="button"
-                title="SETTINGS"
-                aria-label="SETTINGS"
+                title="Settings"
+                aria-label="Settings"
                 aria-haspopup="menu"
                 aria-expanded={activeMenu === "settings"}
                 onClick={() => toggleMenu("settings")}
@@ -230,27 +201,24 @@ const Header = () => {
               >
                 <Settings size={20} strokeWidth={1.75} />
               </button>
-
               {activeMenu === "settings" && (
                 <HeaderSettingsMenu toggleMenu={toggleMenu} />
               )}
             </div>
 
-            {/* PROFILE dropdown wrapper */}
-            <div className="relative" ref={profileMenuRef}>
+            <div className="relative ml-1" ref={profileMenuRef}>
               {profileImage ? (
                 <button
                   type="button"
-                  className="relative flex rounded-full bg-gray-800 text-sm"
+                  className="relative flex rounded-full ring-2 ring-transparent hover:ring-[#2D6A4F] transition-all duration-150"
                   id="user-menu-button"
                   aria-haspopup="true"
                   aria-expanded={activeMenu === "profile"}
                   onClick={() => toggleMenu("profile")}
                 >
-                  <span className="absolute -inset-1.5"></span>
                   <span className="sr-only">Open user menu</span>
                   <Image
-                    className="h-8 w-8 rounded-full"
+                    className="h-8 w-8 rounded-full object-cover"
                     src={profileImage}
                     alt=""
                     width={40}
@@ -260,8 +228,8 @@ const Header = () => {
               ) : (
                 <button
                   type="button"
-                  title="PROFILE"
-                  aria-label="PROFILE"
+                  title="Profile"
+                  aria-label="Profile"
                   aria-haspopup="menu"
                   aria-expanded={activeMenu === "profile"}
                   onClick={() => toggleMenu("profile")}
@@ -270,8 +238,6 @@ const Header = () => {
                   <User size={20} strokeWidth={1.75} />
                 </button>
               )}
-
-              {/* drop down profile menu options */}
               {activeMenu === "profile" && (
                 <HeaderProfileMenu
                   setActiveMenu={setActiveMenu}
@@ -284,13 +250,12 @@ const Header = () => {
 
         {/* top-right controls logged OUT */}
         {!session && (
-          <nav className="flex items-center gap-4">
-            {/* SETTINGS dropdown wrapper */}
+          <nav className="flex items-center gap-3">
             <div className="relative" ref={settingsMenuRef}>
               <button
                 type="button"
-                title="SETTINGS"
-                aria-label="SETTINGS"
+                title="Settings"
+                aria-label="Settings"
                 aria-haspopup="menu"
                 aria-expanded={activeMenu === "settings"}
                 onClick={() => toggleMenu("settings")}
@@ -298,7 +263,6 @@ const Header = () => {
               >
                 <Settings size={20} strokeWidth={1.75} />
               </button>
-
               {activeMenu === "settings" && (
                 <HeaderSettingsMenu toggleMenu={toggleMenu} />
               )}
@@ -309,10 +273,10 @@ const Header = () => {
                 <button
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="flex items-center text-white font-extrabold text-sm rounded-lg px-2 py-2 bg-[#5D3FD3]/90 hover:bg-[#5D3FD3]/75"
+                  className="flex items-center gap-2 text-white text-sm font-medium rounded-lg px-3 py-2 bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
                 >
-                  <FaGoogle className="text-white text-sm mr-2" />
-                  <span>Sign In</span>
+                  <FaGoogle className="text-white text-xs" />
+                  <span>Sign in</span>
                 </button>
               ))}
           </nav>

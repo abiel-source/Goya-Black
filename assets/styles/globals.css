@@ -1,18 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
+  --background: #F9F9F7;
+  --foreground: #111111;
+  --accent: #2D6A4F;
+  --accent-hover: #235C43;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --card: #FFFFFF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
 }
 
 html,
 body {
-  /* let the document grow naturally with masonic layout */
   min-height: 100%;
   height: auto;
 }
