@@ -1,20 +1,22 @@
-import { DM_Sans } from "next/font/google";
+import { Bodoni_Moda } from "next/font/google";
 import "@/assets/styles/globals.css";
 import AuthProvider from "@/components/auth/AuthProvider";
 import Header from "@/components/root/Header";
-// import Footer from "@/components/root/Footer";
 import SideNav from "@/components/root/SideNav";
 import FooterNav from "@/components/root/FooterNav";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "@/components/root/ToastProvider";
 
-import { Suspense } from "react"; // production build error fix
+import { Suspense } from "react";
 
-const dm_sans = DM_Sans({
+const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-bodoni",
   display: "swap",
 });
+
 
 export const metadata = {
   title: "Goya Black",
@@ -28,7 +30,7 @@ const RootLayout = ({ children }) => {
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={`${dm_sans.className} antialiased`}>
+        <body className={`${bodoni.variable} antialiased`}>
           <div className="h-dvh flex flex-row overflow-hidden">
             {/* Sidebar — full height, fixed width */}
             <SideNav />
