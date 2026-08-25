@@ -8,9 +8,9 @@ const LikeSchema = new Schema(
       required: true,
       index: true,
     },
-    fragmentId: {
+    paintingId: {
       type: Schema.Types.ObjectId,
-      ref: "Fragment",
+      ref: "Painting",
       required: true,
       index: true,
     },
@@ -18,8 +18,7 @@ const LikeSchema = new Schema(
   { timestamps: true }
 );
 
-// CONSTRAINT: One like per user per fragment
-LikeSchema.index({ userId: 1, fragmentId: 1 }, { unique: true });
+LikeSchema.index({ userId: 1, paintingId: 1 }, { unique: true });
 
 const Like = models.Like || model("Like", LikeSchema);
 export default Like;

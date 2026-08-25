@@ -8,18 +8,16 @@ const ViewSchema = new Schema(
       required: true,
       index: true,
     },
-    fragmentId: {
+    paintingId: {
       type: Schema.Types.ObjectId,
-      ref: "Fragment",
+      ref: "Painting",
       required: true,
       index: true,
     },
-
     lastViewedAt: {
       type: Date,
       default: Date.now,
     },
-
     viewCount: {
       type: Number,
       default: 1,
@@ -29,7 +27,7 @@ const ViewSchema = new Schema(
   { timestamps: true }
 );
 
-ViewSchema.index({ userId: 1, fragmentId: 1 }, { unique: true });
+ViewSchema.index({ userId: 1, paintingId: 1 }, { unique: true });
 
 const View = models.View || model("View", ViewSchema);
 export default View;
