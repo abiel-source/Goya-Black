@@ -17,8 +17,11 @@ const dm_sans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Crystal Clear",
-  description: "Photography Marketplace",
+  title: "Goya Black",
+  description: "A digital museum of classical art",
+  icons: {
+    icon: "/goya.svg",
+  },
 };
 
 const RootLayout = ({ children }) => {

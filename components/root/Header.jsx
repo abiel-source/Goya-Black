@@ -109,23 +109,19 @@ const Header = () => {
     <header className="sticky top-0 z-50 h-16 border-b border-[#E5E7EB] bg-white">
       <div className="flex h-full w-full items-center justify-between px-4">
         {/* Logo + Search */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-0">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-[#111111] tracking-tight"
-          >
+          <Link href="/" className="flex w-16 shrink-0 -ml-4 items-center justify-center">
             <Image
-              src="/CrystalClearLogo.svg"
-              alt="Logo"
-              width={20}
-              height={18}
+              src="/goya.svg"
+              alt="Goya Black"
+              width={36}
+              height={36}
             />
-            <span className="hidden sm:inline">Crystal Clear</span>
           </Link>
 
           {/* Search Bar */}
-          <div className="relative ml-2">
+          <div className="relative">
             <input
               type="search"
               placeholder="Search photos, collections..."
