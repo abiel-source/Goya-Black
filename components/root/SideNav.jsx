@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -30,13 +31,13 @@ import {
 
 const navBtn = `
   inline-flex h-9 w-9 items-center justify-center
-  rounded-lg text-zinc-400 hover:text-[#2D6A4F] hover:bg-[#2D6A4F]/8
+  rounded-lg text-zinc-400 hover:text-[#111111] hover:bg-zinc-100
   transition-colors duration-150
 `;
 
 const navBtnActive = `
   inline-flex h-9 w-9 items-center justify-center
-  rounded-lg text-[#2D6A4F]
+  rounded-lg text-[#111111]
 `;
 
 export default function SideNav() {
@@ -101,32 +102,30 @@ export default function SideNav() {
       className="
         z-49
         hidden md:flex
-        sticky top-16
-        h-[calc(100dvh-4rem)]
+        h-full
         w-16 shrink-0
         border-r border-[#E5E7EB] bg-white
         flex-col items-center
-        py-8
+        py-3
       "
       aria-label="Sidebar"
     >
-      <div className="flex flex-col items-center gap-6">
+      <div className="flex flex-col items-center gap-4">
+        <Link href="/" className="flex items-center justify-center mb-2">
+          <Image src="/goya.svg" alt="Goya Black" width={30} height={30} />
+        </Link>
         <Link href="/" title="Home" aria-label="Home" className={activeIcon === "home" ? navBtnActive : navBtn}>
-          {activeIcon === "home" ? (
-            <HomeIconSolid className="h-6 w-6" />
-          ) : (
-            <HomeIcon className="h-6 w-6" />
-          )}
+          {activeIcon === "home" ? <HomeIconSolid className="h-6 w-6" /> : <HomeIcon className="h-6 w-6" />}
         </Link>
 
         <Link href="/explore" title="Explore" aria-label="Explore" className={activeIcon === "explore" ? navBtnActive : navBtn}>
-          {activeIcon === "explore" ? (
-            <GlobeAsiaAustraliaIconSolid className="h-6 w-6" />
-          ) : (
-            <GlobeAsiaAustraliaIcon className="h-6 w-6" />
-          )}
+          {activeIcon === "explore" ? <GlobeAsiaAustraliaIconSolid className="h-6 w-6" /> : <GlobeAsiaAustraliaIcon className="h-6 w-6" />}
         </Link>
+      </div>
 
+      <div className="w-8 border-t border-[#E5E7EB] my-5" />
+
+      <div className="flex flex-col items-center gap-4">
         <CreateMenu
           title="Create"
           ariaLabel="Create"
@@ -138,11 +137,7 @@ export default function SideNav() {
         />
 
         <Link href="/library" title="Library" aria-label="Library" className={activeIcon === "library" ? navBtnActive : navBtn}>
-          {activeIcon === "library" ? (
-            <UserCircleIconSolid className="h-6 w-6" />
-          ) : (
-            <UserCircleIcon className="h-6 w-6" />
-          )}
+          {activeIcon === "library" ? <UserCircleIconSolid className="h-6 w-6" /> : <UserCircleIcon className="h-6 w-6" />}
         </Link>
 
         <button
@@ -152,20 +147,13 @@ export default function SideNav() {
           onClick={() => setMessagesOpen(true)}
           className={activeIcon === "messages" ? navBtnActive : navBtn}
         >
-          {activeIcon === "messages" ? (
-            <ChatBubbleLeftIconSolid className="h-6 w-6" />
-          ) : (
-            <ChatBubbleLeftIcon className="h-6 w-6" />
-          )}
+          {activeIcon === "messages" ? <ChatBubbleLeftIconSolid className="h-6 w-6" /> : <ChatBubbleLeftIcon className="h-6 w-6" />}
         </button>
 
-        <MessagesModal
-          open={messagesOpen}
-          onClose={() => setMessagesOpen(false)}
-        />
+        <MessagesModal open={messagesOpen} onClose={() => setMessagesOpen(false)} />
       </div>
 
-      <div className="mt-auto pt-8">
+      <div className="mt-auto pt-3">
         <SettingsMenu
           title="Settings"
           ariaLabel="Settings"

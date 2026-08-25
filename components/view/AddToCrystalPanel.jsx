@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -157,7 +157,7 @@ const AddToCrystalPanel = ({ fragmentId, onClose }) => {
                   </div>
 
                   {membership[crystal._id] ? (
-                    <BookmarkIconSolid className="h-4 w-4 text-[#2D6A4F]" />
+                    <BookmarkIconSolid className="h-4 w-4 text-[#722F37]" />
                   ) : (
                     <BookmarkIcon className="h-4 w-4 text-zinc-400" />
                   )}

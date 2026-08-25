@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 const HeaderProfileMenu = ({ setActiveMenu, signOut }) => {
   return (
@@ -21,7 +21,7 @@ const HeaderProfileMenu = ({ setActiveMenu, signOut }) => {
 
       <Link
         href="/library"
-        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#722F37] transition-colors duration-150"
         role="menuitem"
         tabIndex={-1}
         onClick={() => setActiveMenu(null)}

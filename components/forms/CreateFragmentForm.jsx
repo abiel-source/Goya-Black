@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -53,7 +53,7 @@ const CreateFragmentForm = () => {
 
             <label
               htmlFor="imageFile"
-              className="group relative cursor-pointer flex items-center justify-center aspect-square rounded-xl border-2 border-dashed border-gray-300 hover:border-[#2D6A4F] transition overflow-hidden bg-[#F9F9F7]"
+              className="group relative cursor-pointer flex items-center justify-center aspect-square rounded-xl border-2 border-dashed border-gray-300 hover:border-[#722F37] transition overflow-hidden bg-[#F9F9F7]"
             >
               {preview ? (
                 <img
@@ -100,8 +100,8 @@ const CreateFragmentForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#2D6A4F]
-              focus:ring-1 focus:ring-[#2D6A4F]
+              focus:border-[#722F37]
+              focus:ring-1 focus:ring-[#722F37]
               transition
             "
               placeholder="eg. Sunset Over Burrard Inlet"
@@ -124,8 +124,8 @@ const CreateFragmentForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#2D6A4F]
-              focus:ring-1 focus:ring-[#2D6A4F]
+              focus:border-[#722F37]
+              focus:ring-1 focus:ring-[#722F37]
               transition
             "
               placeholder="eg. street, neon, night, film"
@@ -147,8 +147,8 @@ const CreateFragmentForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#2D6A4F]
-              focus:ring-1 focus:ring-[#2D6A4F]
+              focus:border-[#722F37]
+              focus:ring-1 focus:ring-[#722F37]
               transition
             "
               rows="4"
@@ -162,8 +162,8 @@ const CreateFragmentForm = () => {
             {myId ? (
               <button
                 className="
-              bg-[#2D6A4F]
-              hover:bg-[#235C43]
+              bg-[#722F37]
+              hover:bg-[#5E2530]
               text-white
                 font-bold
                 py-3 px-4
@@ -181,7 +181,7 @@ const CreateFragmentForm = () => {
                   toast.error("You must be signed in to create a fragment")
                 }
                 className="
-            bg-[#2D6A4F]/50
+            bg-[#722F37]/50
             text-white
             font-bold
             py-3 px-4

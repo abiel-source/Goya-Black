@@ -186,7 +186,7 @@ export default function SeedCrystalModal({
         type="button"
         onClick={() => setOpen(true)}
         className="rounded-xl px-4 py-2 text-sm font-medium text-white"
-        style={{ backgroundColor: "#5D3FD3" }}
+        style={{ backgroundColor: "#722F37" }}
       >
         Add images
       </button>
@@ -217,7 +217,7 @@ export default function SeedCrystalModal({
                 </button>
                 <button
                   className="rounded-xl px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-                  style={{ backgroundColor: "#5D3FD3" }}
+                  style={{ backgroundColor: "#722F37" }}
                   onClick={handleDone}
                   disabled={saving}
                   type="button"

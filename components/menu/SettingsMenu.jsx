@@ -29,7 +29,7 @@ const SettingsMenu = ({
         aria-haspopup="menu"
         aria-expanded={isOpen}
         onClick={onToggle}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-[#2D6A4F] hover:bg-[#2D6A4F]/8 transition-colors duration-150"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-[#111111] hover:bg-zinc-100 transition-colors duration-150"
       >
         <Icon className="h-6 w-6" />
       </button>
@@ -50,7 +50,7 @@ const SettingsMenu = ({
           <Link
             href="/settings/about"
             role="menuitem"
-            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
             onClick={onToggle}
           >
             About
@@ -59,7 +59,7 @@ const SettingsMenu = ({
           <Link
             href="/settings/features"
             role="menuitem"
-            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
             onClick={onToggle}
           >
             Features & Developer Notes
@@ -68,7 +68,7 @@ const SettingsMenu = ({
           <Link
             href="/settings/policy"
             role="menuitem"
-            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
             onClick={onToggle}
           >
             Privacy Policy

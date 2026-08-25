@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+﻿////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// AUTHOR NOTES ///////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 // rewrite to use session status like in FragmentCardDetails.jsx
@@ -177,7 +177,7 @@ const FragmentCard = ({ data, style, width }) => {
           >
             <button
               onClick={() => setAddToCrystalOpen(true)}
-              className="px-2 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
+              className="px-2 py-2 text-xs font-medium text-white rounded-md bg-[#722F37] hover:bg-[#5E2530] transition-colors duration-150"
               aria-label="Add To Crystal"
               title="Add To Crystal"
             >
@@ -185,14 +185,14 @@ const FragmentCard = ({ data, style, width }) => {
             </button>
 
             {userId && loadingSaved && (
-              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F]">
+              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#722F37]">
                 ...
               </p>
             )}
 
             {!loadingSaved && (
               <button
-                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
+                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#722F37] hover:bg-[#5E2530] transition-colors duration-150"
                 onClick={handleToggleSave}
               >
                 {isSaved ? "Unsave" : "Save"}
@@ -219,7 +219,7 @@ const FragmentCard = ({ data, style, width }) => {
                 <Heart
                   size={20}
                   strokeWidth={1.75}
-                  className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : "stroke-white"}
+                  className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : "stroke-white"}
                 />
               </button>
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { Masonry } from "masonic";
@@ -80,7 +80,7 @@ const LibraryCrystalMasonryGallery = ({ crystalId, seed, crystal }) => {
               disabled={true}
               onClick={() => {}}
               className="rounded-xl px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-              style={{ backgroundColor: "#5D3FD3" }}
+              style={{ backgroundColor: "#722F37" }}
             >
               Add images
             </button>

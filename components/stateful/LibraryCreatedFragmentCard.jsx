@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -199,7 +199,7 @@ const LibraryCreatedFragmentCard = ({
             {userId && loadingSaved && (
               <p
                 className="px-3 py-2 text-xs font-medium text-white rounded-md"
-                style={{ backgroundColor: "#5D3FD3" }}
+                style={{ backgroundColor: "#722F37" }}
               >
                 ...
               </p>
@@ -215,7 +215,7 @@ const LibraryCreatedFragmentCard = ({
                 text-white
                 rounded-md
               "
-                style={{ backgroundColor: "#5D3FD3" }}
+                style={{ backgroundColor: "#722F37" }}
                 onClick={handleToggleSave}
               >
                 {isSaved ? "Unsave" : "Save"}
@@ -237,7 +237,7 @@ const LibraryCreatedFragmentCard = ({
                 <Heart
                   size={20}
                   strokeWidth={1.75}
-                  className={isLiked ? "fill-[#5D3FD3] stroke-[#5D3FD3]" : ""}
+                  className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : ""}
                 />
               </button>
 

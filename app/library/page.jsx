@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import connectDB from "@/config/database";
 import { randomBetween } from "@/utils/restructureData";
 import { getSessionUser } from "@/utils/getSessionUser";
@@ -126,7 +126,7 @@ const LibraryPage = async ({ searchParams }) => {
         <Link
           href={`/library?tab=created`}
           className={`rounded-lg px-4 py-2 text-sm transition ${
-            tab === "created" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
+            tab === "created" ? "bg-[#722F37] text-white" : "text-zinc-500 hover:text-[#722F37]"
           }`}
         >
           Created
@@ -135,7 +135,7 @@ const LibraryPage = async ({ searchParams }) => {
         <Link
           href={`/library?tab=saved`}
           className={`rounded-lg px-6 py-2 text-sm transition ${
-            tab === "saved" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
+            tab === "saved" ? "bg-[#722F37] text-white" : "text-zinc-500 hover:text-[#722F37]"
           }`}
         >
           Saved

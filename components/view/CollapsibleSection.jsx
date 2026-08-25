@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -15,7 +15,7 @@ const CollapsibleSection = ({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="flex w-full items-center justify-between rounded-lg bg-[#5D3FD3]/90 hover:bg-[#5D3FD3]/75 p-2 mt-10"
+        className="flex w-full items-center justify-between rounded-lg bg-[#722F37]/90 hover:bg-[#722F37]/75 p-2 mt-10"
       >
         <ChevronDown
           className={`ml-2 h-5 w-5 shrink-0 transition-transform duration-300 ${
