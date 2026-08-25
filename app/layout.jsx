@@ -29,27 +29,24 @@ const RootLayout = ({ children }) => {
     <AuthProvider>
       <html lang="en">
         <body className={`${dm_sans.className} antialiased`}>
-          <div className="min-h-dvh flex flex-col">
-            {/* build error fix */}
-            <Suspense fallback={null}>
-              <Header />
-            </Suspense>
+          <div className="h-dvh flex flex-row overflow-hidden">
+            {/* Sidebar — full height, fixed width */}
+            <SideNav />
 
-            {/* Below-header region */}
-            {/* min-h-0 allows children to shrink and scroll */}
-            <div className="flex flex-1 min-h-0">
-              <SideNav />
+            {/* Right column — header + scrollable content */}
+            <div className="flex flex-col flex-1 min-w-0 h-full">
+              <Suspense fallback={null}>
+                <Header />
+              </Suspense>
 
-              {/* Only this scrolls */}
-              <main className="flex-1 min-w-0 overflow-y-auto pb-16 md:pb-0">
+              <main className="flex-1 min-h-0 overflow-y-auto pb-16 md:pb-0">
                 {children}
               </main>
             </div>
-
-            <FooterNav />
-
-            <ToastProvider />
           </div>
+
+          <FooterNav />
+          <ToastProvider />
         </body>
       </html>
     </AuthProvider>

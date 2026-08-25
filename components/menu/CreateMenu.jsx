@@ -29,7 +29,7 @@ const CreateMenu = ({
         aria-haspopup="menu"
         aria-expanded={isOpen}
         onClick={onToggle}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-[#2D6A4F] hover:bg-[#2D6A4F]/8 transition-colors duration-150"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-[#111111] hover:bg-zinc-100 transition-colors duration-150"
       >
         <Icon className="h-6 w-6" />
       </button>

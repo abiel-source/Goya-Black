@@ -18,7 +18,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
       <Link
         href="/settings/about"
         role="menuitem"
-        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
         onClick={() => toggleMenu("settings")}
       >
         About
@@ -27,7 +27,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
       <Link
         href="/settings/features"
         role="menuitem"
-        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
         onClick={() => toggleMenu("settings")}
       >
         Features & Developer Notes
@@ -36,7 +36,7 @@ const HeaderSettingsMenu = ({ toggleMenu }) => {
       <Link
         href="/settings/policy"
         role="menuitem"
-        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
+        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#111111] transition-colors duration-150"
         onClick={() => toggleMenu("settings")}
       >
         Privacy Policy

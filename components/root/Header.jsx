@@ -1,12 +1,10 @@
 "use client";
 
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import Link from "next/link";
 import { Search, Settings, User, ShieldHalf } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 
 import RankMenu from "@/components/menu/header/RankMenu";
 import HeaderSettingsMenu from "@/components/menu/header/HeaderSettingsMenu";
@@ -14,7 +12,7 @@ import HeaderProfileMenu from "@/components/menu/header/HeaderProfileMenu";
 import SearchModal from "@/components/modals/SearchModal";
 
 const iconBtn =
-  "inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150";
+  "inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 hover:text-[#111111] transition-colors duration-150";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -106,22 +104,11 @@ const Header = () => {
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-[#E5E7EB] bg-white">
+    <header className="z-50 h-16 border-b border-[#E5E7EB] bg-white shrink-0">
       <div className="flex h-full w-full items-center justify-between px-4">
-        {/* Logo + Search */}
-        <div className="flex items-center gap-0">
-          {/* Logo */}
-          <Link href="/" className="flex w-16 shrink-0 -ml-4 items-center justify-center">
-            <Image
-              src="/goya.svg"
-              alt="Goya Black"
-              width={36}
-              height={36}
-            />
-          </Link>
-
-          {/* Search Bar */}
-          <div className="relative">
+        {/* Search */}
+        <div className="flex items-center gap-0 flex-1 min-w-0">
+          <div className="relative flex-1 mr-4">
             <input
               type="search"
               placeholder="Search photos, collections..."
@@ -135,7 +122,7 @@ const Header = () => {
                 }
               }}
               className="
-                h-9 w-48 sm:w-64 md:w-80 lg:w-96
+                h-9 w-full
                 rounded-lg border border-[#E5E7EB] bg-[#F9F9F7]
                 pl-3 pr-10 text-sm text-[#111111]
                 placeholder:text-zinc-400
@@ -151,7 +138,7 @@ const Header = () => {
               className="
                 absolute right-1 top-1
                 inline-flex h-7 w-7 items-center justify-center
-                rounded-md text-zinc-400 hover:text-[#2D6A4F]
+                rounded-md text-zinc-400 hover:text-[#111111]
                 transition-colors duration-150
               "
             >
