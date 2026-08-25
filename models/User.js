@@ -43,10 +43,10 @@ const UserSchema = new Schema(
           default: [],
         },
       ],
-      collections: [
+      galleries: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Collection",
+          ref: "Gallery",
           default: [],
         },
       ],

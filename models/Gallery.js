@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const CollectionSchema = new Schema(
+const GallerySchema = new Schema(
   {
     ownerId: {
       type: Schema.Types.ObjectId,
@@ -37,7 +37,7 @@ const CollectionSchema = new Schema(
   { timestamps: true }
 );
 
-CollectionSchema.index({ ownerId: 1, createdAt: -1 });
+GallerySchema.index({ ownerId: 1, createdAt: -1 });
 
-const Collection = models.Collection || model("Collection", CollectionSchema);
-export default Collection;
+const Gallery = models.Gallery || model("Gallery", GallerySchema);
+export default Gallery;
