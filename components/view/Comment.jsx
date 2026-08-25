@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Heart } from "lucide-react";
 
@@ -28,7 +28,7 @@ export default function Comment({ comment, indent = 0, onToggleLike, liking }) {
         <div className="mt-1 flex items-center gap-3 text-xs text-zinc-400">
           <button
             type="button"
-            className="inline-flex items-center gap-1 hover:text-[#2D6A4F] transition-colors duration-150 disabled:opacity-50"
+            className="inline-flex items-center gap-1 hover:text-[#722F37] transition-colors duration-150 disabled:opacity-50"
             onClick={() => onToggleLike?.(comment)}
             disabled={!!liking}
             title={isLikedByMe ? "Unlike" : "Like"}
@@ -36,7 +36,7 @@ export default function Comment({ comment, indent = 0, onToggleLike, liking }) {
             <Heart
               size={16}
               strokeWidth={1.75}
-              className={isLikedByMe ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : ""}
+              className={isLikedByMe ? "fill-[#722F37] stroke-[#722F37]" : ""}
             />
             <span>{likes}</span>
           </button>

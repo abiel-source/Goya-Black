@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
@@ -268,7 +268,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
                     {thread?.replyCount > 0 && (
                       <button
                         type="button"
-                        className="hover:text-[#2D6A4F] transition-colors duration-150"
+                        className="hover:text-[#722F37] transition-colors duration-150"
                         onClick={() => toggleReplies(threadId)}
                       >
                         {expanded ? "Hide replies" : `View ${thread.replyCount} replies`}
@@ -277,7 +277,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
 
                     <button
                       type="button"
-                      className="hover:text-[#2D6A4F] transition-colors duration-150"
+                      className="hover:text-[#722F37] transition-colors duration-150"
                       onClick={() => setReplyToThreadId(threadId)}
                     >
                       Reply
@@ -337,7 +337,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
               className="
                 flex-1 rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
                 px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
-                outline-none focus:border-[#2D6A4F]
+                outline-none focus:border-[#722F37]
               "
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
@@ -350,7 +350,7 @@ const CommentsPanel = ({ fragmentId, imgSrc }) => {
               type="button"
               onClick={handleSend}
               disabled={sending || draft.trim().length === 0}
-              className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#2D6A4F] hover:bg-[#235C43] disabled:opacity-50 transition-colors duration-150"
+              className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#722F37] hover:bg-[#5E2530] disabled:opacity-50 transition-colors duration-150"
             >
               {sending ? "Posting..." : "Post"}
             </button>

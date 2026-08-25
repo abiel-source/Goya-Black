@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -192,7 +192,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
             </button>
 
             {userId && loadingSaved && (
-              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F]">
+              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#722F37]">
                 ...
               </p>
             )}
@@ -207,7 +207,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
                 text-white
                 rounded-md
               "
-                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
+                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#722F37] hover:bg-[#5E2530] transition-colors duration-150"
                 onClick={handleToggleSave}
               >
                 {isSaved ? "Unsave" : "Save"}
@@ -229,7 +229,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
                 <Heart
                   size={20}
                   strokeWidth={1.75}
-                  className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : "stroke-white"}
+                  className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : "stroke-white"}
                 />
               </button>
 

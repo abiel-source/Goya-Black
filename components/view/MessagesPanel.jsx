@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -264,7 +264,7 @@ export default function MessagesPanel() {
             className="
               w-full rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
               px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
-              outline-none focus:border-[#2D6A4F]
+              outline-none focus:border-[#722F37]
               transition-colors duration-150
             "
           />
@@ -318,7 +318,7 @@ export default function MessagesPanel() {
                           type="button"
                           onClick={() => openConversation(c)}
                           className={`w-full text-left rounded-xl px-3 py-2 transition-colors duration-150 ${
-                            active ? "bg-[#2D6A4F]/10" : "hover:bg-zinc-50"
+                            active ? "bg-[#722F37]/10" : "hover:bg-zinc-50"
                           }`}
                         >
                           <div className="text-sm text-[#111111]">{title}</div>
@@ -378,7 +378,7 @@ export default function MessagesPanel() {
                           <div
                             className={`max-w-[75%] rounded-2xl px-3 py-2 text-sm ${
                               mine
-                                ? "bg-[#2D6A4F] text-white"
+                                ? "bg-[#722F37] text-white"
                                 : "bg-zinc-100 text-[#111111]"
                             }`}
                           >
@@ -404,7 +404,7 @@ export default function MessagesPanel() {
                   className="
                     flex-1 rounded-xl bg-[#F9F9F7] border border-[#E5E7EB]
                     px-3 py-2 text-sm text-[#111111] placeholder:text-zinc-400
-                    outline-none focus:border-[#2D6A4F]
+                    outline-none focus:border-[#722F37]
                     transition-colors duration-150
                   "
                   onKeyDown={(e) => {
@@ -418,7 +418,7 @@ export default function MessagesPanel() {
                   type="button"
                   onClick={handleSend}
                   disabled={sending || draft.trim().length === 0}
-                  className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#2D6A4F] hover:bg-[#235C43] disabled:opacity-50 transition-colors duration-150"
+                  className="rounded-xl px-4 py-2 text-sm font-medium text-white bg-[#722F37] hover:bg-[#5E2530] disabled:opacity-50 transition-colors duration-150"
                 >
                   {sending ? "Sending..." : "Send"}
                 </button>

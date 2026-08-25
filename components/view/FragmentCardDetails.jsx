@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////
+﻿////////////////////////////////////////////////////////////////////////////
 /////////////////////////////// AUTHOR NOTES ///////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 // revise `checkLikeStatus.js` action to reduce redundant api calls
@@ -32,7 +32,7 @@ import AddToCrystalModal from "@/components/modals/AddToCrystalModal";
 
 import { Heart, Eye, Share, MessageCircle, GemIcon } from "lucide-react";
 
-const ACCENT = "#2D6A4F";
+const ACCENT = "#722F37";
 
 const formatDate = (iso) => {
   if (!iso) return "";
@@ -341,12 +341,12 @@ const FragmentCardDetails = ({
           <div className="flex items-center gap-4">
             <button
               onClick={handleToggleLike}
-              className="flex items-center gap-1 text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150"
+              className="flex items-center gap-1 text-zinc-500 hover:text-[#722F37] transition-colors duration-150"
             >
               <Heart
                 size={20}
                 strokeWidth={1.75}
-                className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : ""}
+                className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : ""}
               />
               {!loadingMetrics ? (
                 <span className="text-xs">{likeCount}</span>
@@ -366,7 +366,7 @@ const FragmentCardDetails = ({
 
             <button
               onClick={() => setMessagesOpen(true)}
-              className="flex items-center gap-1 text-zinc-500 hover:text-[#2D6A4F] transition-colors duration-150"
+              className="flex items-center gap-1 text-zinc-500 hover:text-[#722F37] transition-colors duration-150"
             >
               <MessageCircle size={20} strokeWidth={1.75} />
               {!loadingMetrics ? (
@@ -388,7 +388,7 @@ const FragmentCardDetails = ({
             <button
               onClick={() => setAddToCrystalOpen(true)}
               className="flex items-center gap-1.5 px-2 py-2 text-xs font-medium text-white rounded-md"
-              style={{ backgroundColor: "#5D3FD3" }}
+              style={{ backgroundColor: "#722F37" }}
             >
               <span className="text-xs text-white">Add</span>
               <GemIcon size={16} strokeWidth={1.75} />

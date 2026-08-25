@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { Search, Settings, User, ShieldHalf } from "lucide-react";
@@ -127,7 +127,7 @@ const Header = () => {
                 pl-3 pr-10 text-sm text-[#111111]
                 placeholder:text-zinc-400
                 outline-none
-                focus:border-[#2D6A4F] focus:bg-white
+                focus:border-[#722F37] focus:bg-white
                 transition-colors duration-150
               "
             />
@@ -193,7 +193,7 @@ const Header = () => {
               {profileImage ? (
                 <button
                   type="button"
-                  className="relative flex rounded-full ring-2 ring-transparent hover:ring-[#2D6A4F] transition-all duration-150"
+                  className="relative flex rounded-full ring-2 ring-transparent hover:ring-[#722F37] transition-all duration-150"
                   id="user-menu-button"
                   aria-haspopup="true"
                   aria-expanded={activeMenu === "profile"}
@@ -256,7 +256,7 @@ const Header = () => {
                 <button
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="flex items-center gap-2 text-white text-sm font-medium rounded-lg px-3 py-2 bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
+                  className="flex items-center gap-2 text-white text-sm font-medium rounded-lg px-3 py-2 bg-[#722F37] hover:bg-[#5E2530] transition-colors duration-150"
                 >
                   <FaGoogle className="text-white text-xs" />
                   <span>Sign in</span>

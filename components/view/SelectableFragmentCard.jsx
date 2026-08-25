@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 export default function SelectableFragmentCard({
   data,
@@ -52,11 +52,11 @@ export default function SelectableFragmentCard({
         <div
           className={`absolute top-2 right-2 h-6 w-6 rounded-full text-xs font-bold grid place-items-center transition
           ${
-            isSelected ? "bg-[#5D3FD3] text-white" : "bg-white/10 text-white/70"
+            isSelected ? "bg-[#722F37] text-white" : "bg-white/10 text-white/70"
           }
         `}
         >
-          ✓
+          âœ“
         </div>
       </button>
     </div>

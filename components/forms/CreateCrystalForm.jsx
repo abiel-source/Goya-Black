@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -35,8 +35,8 @@ const CreateCrystalForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#2D6A4F]
-              focus:ring-1 focus:ring-[#2D6A4F]
+              focus:border-[#722F37]
+              focus:ring-1 focus:ring-[#722F37]
               transition
             "
             placeholder="eg. Neon Nights in Vancouver"
@@ -59,8 +59,8 @@ const CreateCrystalForm = () => {
               w-full
               py-2 px-3
               outline-none
-              focus:border-[#2D6A4F]
-              focus:ring-1 focus:ring-[#2D6A4F]
+              focus:border-[#722F37]
+              focus:ring-1 focus:ring-[#722F37]
               transition
               resize-none
             "
@@ -84,7 +84,7 @@ const CreateCrystalForm = () => {
             className={`
               relative inline-flex h-6 w-11 items-center rounded-full
               transition-colors duration-200
-              ${isPrivate ? "bg-[#2D6A4F]" : "bg-gray-300"}
+              ${isPrivate ? "bg-[#722F37]" : "bg-gray-300"}
             `}
           >
             <span
@@ -111,8 +111,8 @@ const CreateCrystalForm = () => {
           <button
             type="submit"
             className="
-              bg-[#2D6A4F]
-              hover:bg-[#235C43]
+              bg-[#722F37]
+              hover:bg-[#5E2530]
               text-white
               font-bold
               py-3 px-4
@@ -130,7 +130,7 @@ const CreateCrystalForm = () => {
               toast.error("You must be signed in to create a crystal")
             }
             className="
-        bg-[#2D6A4F]/50
+        bg-[#722F37]/50
         text-white
         font-bold
         py-3 px-4

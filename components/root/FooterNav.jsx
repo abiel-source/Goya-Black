@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,13 +27,13 @@ import {
 
 const navBtn = `
   inline-flex h-10 w-10 items-center justify-center
-  rounded-lg text-zinc-400 hover:text-[#2D6A4F]
+  rounded-lg text-zinc-400 hover:text-[#722F37]
   transition-colors duration-150
 `;
 
 const navBtnActive = `
   inline-flex h-10 w-10 items-center justify-center
-  rounded-lg text-[#2D6A4F]
+  rounded-lg text-[#722F37]
 `;
 
 export default function FooterNav() {

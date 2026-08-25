@@ -111,7 +111,7 @@ export default function SideNav() {
       aria-label="Sidebar"
     >
       <div className="flex flex-col items-center gap-4">
-        <Link href="/" className="flex items-center justify-center">
+        <Link href="/" className="flex items-center justify-center mb-2">
           <Image src="/goya.svg" alt="Goya Black" width={30} height={30} />
         </Link>
         <Link href="/" title="Home" aria-label="Home" className={activeIcon === "home" ? navBtnActive : navBtn}>
