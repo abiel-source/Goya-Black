@@ -6,23 +6,22 @@ const RankMenu = ({ toggleMenu }) => {
       role="menu"
       className="
           absolute right-0 top-full mt-2
-          z-50 w-64 origin-top-right rounded-md
-          border border-[#5D3FD3]/75 bg-black 
-          text-white p-2 shadow-lg
-          ring-1 ring-black ring-opacity-5 focus:outline-none
+          z-50 w-64 origin-top-right rounded-xl
+          border border-[#E5E7EB] bg-white
+          p-2 shadow-lg focus:outline-none
         "
     >
-      <h1 className="block rounded-lg px-3 py-2 text-white font-semibold">
-        <div>Rank Menu</div>
-        <div>(coming soon...)</div>
+      <h1 className="block rounded-lg px-3 py-2 text-[#111111] font-semibold text-sm">
+        <div>Rank</div>
+        <div className="text-zinc-400 font-normal">(coming soon)</div>
       </h1>
 
-      <div className="block rounded-lg px-4 py-3 text-sm text-white bg-[#5D3FD3]/33">
+      <div className="block rounded-lg px-4 py-3 text-sm text-zinc-600 bg-zinc-50 border border-[#E5E7EB]">
         <div>
           Rise through the ranks; get recognized for your outstanding crystals.
         </div>
         <br />
-        <div className="font-semibold">
+        <div className="font-semibold text-[#111111]">
           Total of 36 tiers in ascending order:
         </div>
         <div>6) Quartz (VI - I)</div>
@@ -38,7 +37,7 @@ const RankMenu = ({ toggleMenu }) => {
       <Link
         href="/settings/features"
         role="menuitem"
-        className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
+        className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
         onClick={() => toggleMenu("rank")}
       >
         Learn more

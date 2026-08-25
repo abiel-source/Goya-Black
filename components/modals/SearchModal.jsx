@@ -32,14 +32,14 @@ export default function SearchModal({ open, onClose, query, setQuery }) {
       <div className="absolute top-16 left-0 md:left-16 right-0 bottom-0 flex items-start justify-start p-0 m-0">
         {/* sm:w-[calc(24rem+4rem)] == sm:w-md */}
         {/* sm breakpoint gets extra 4rem to account for removal of side navigation bar */}
-        <div className="relative w-[calc(20rem)] sm:w-md md:w-lg lg:w-2xl h-[85vh] rounded-b-2xl bg-black shadow-xl overflow-hidden flex flex-col">
+        <div className="relative w-[calc(20rem)] sm:w-md md:w-lg lg:w-2xl h-[85vh] rounded-b-2xl bg-white border border-[#E5E7EB] shadow-xl overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3">
-            <div className="text-white font-semibold">Search Results</div>
+          <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E7EB]">
+            <div className="text-[#111111] font-semibold">Search Results</div>
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg px-3 py-1.5 text-sm text-white/70 hover:text-white hover:bg-white/10 transition"
+              className="rounded-lg px-3 py-1.5 text-sm text-zinc-400 hover:text-[#111111] hover:bg-zinc-100 transition"
             >
               Close
             </button>

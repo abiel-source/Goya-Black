@@ -53,12 +53,10 @@ const FragmentCard = ({ data, style, width }) => {
 
     (async () => {
       try {
-        // Always fetch base counts (works for logged-out too)
         const metrics = await getFragmentMetrics(fragmentId);
         setLikeCount(metrics.likeCount);
         setViewCount(metrics.viewCount);
 
-        // If logged in, also fetch isLiked + authoritative counts
         if (userId) {
           const likeRes = await checkLikeStatus(fragmentId);
           setIsLiked(!!likeRes.isLiked);
@@ -78,7 +76,6 @@ const FragmentCard = ({ data, style, width }) => {
   useEffect(() => {
     if (!fragmentId) return;
 
-    // Save status is only relevant when logged in
     if (!userId) {
       setLoadingSaved(false);
       setIsSaved(false);
@@ -99,7 +96,6 @@ const FragmentCard = ({ data, style, width }) => {
     })();
   }, [fragmentId, userId]);
 
-  // straightforward handle save button click
   const handleToggleSave = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -115,7 +111,6 @@ const FragmentCard = ({ data, style, width }) => {
     }
   };
 
-  // straightforward handle like button click
   const handleToggleLike = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -132,7 +127,6 @@ const FragmentCard = ({ data, style, width }) => {
       setIsLiked(!!res.isLiked);
       setLikeCount(res.likeCount ?? prevCount);
     } catch (e) {
-      // revert
       setIsLiked(prevLiked);
       setLikeCount(prevCount);
       toast.error(e?.message || "Failed to toggle like");
@@ -142,7 +136,7 @@ const FragmentCard = ({ data, style, width }) => {
   return (
     // IMPORTANT: apply masonic's positioning style
     <div style={style}>
-      <div className="flex flex-col bg-black overflow-hidden w-full">
+      <div className="flex flex-col overflow-hidden w-full">
         {/* Hover group wrapper */}
         <div
           className="relative w-full group"
@@ -183,41 +177,22 @@ const FragmentCard = ({ data, style, width }) => {
           >
             <button
               onClick={() => setAddToCrystalOpen(true)}
-              className="
-                px-2
-                py-2
-                text-xs
-                font-medium
-                text-white
-                rounded-md
-              "
-              style={{ backgroundColor: "#5D3FD3" }}
+              className="px-2 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
               aria-label="Add To Crystal"
               title="Add To Crystal"
             >
-              <GemIcon size={18} strokeWidth={1.75} className="" />
+              <GemIcon size={18} strokeWidth={1.75} />
             </button>
 
             {userId && loadingSaved && (
-              <p
-                className="px-3 py-2 text-xs font-medium text-white rounded-md"
-                style={{ backgroundColor: "#5D3FD3" }}
-              >
+              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F]">
                 ...
               </p>
             )}
 
             {!loadingSaved && (
               <button
-                className="
-                px-3
-                py-2
-                text-xs
-                font-medium
-                text-white
-                rounded-md
-              "
-                style={{ backgroundColor: "#5D3FD3" }}
+                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
                 onClick={handleToggleSave}
               >
                 {isSaved ? "Unsave" : "Save"}
@@ -225,12 +200,17 @@ const FragmentCard = ({ data, style, width }) => {
             )}
           </div>
 
+          {/* name overlay with gradient */}
+          <div className="absolute bottom-0 left-0 right-0 px-3 pb-8 pt-10 bg-gradient-to-t from-black/60 to-transparent pointer-events-none rounded-b-lg">
+            <span className="text-sm font-medium text-white drop-shadow">{name}</span>
+          </div>
+
           {/* bottom bar */}
           <div
             className="
               absolute bottom-0 left-0 right-0 px-1 py-1
               flex items-center justify-between
-              opacity-0 -translate-y-1 transition-all duration-200
+              opacity-0 translate-y-1 transition-all duration-200
               group-hover:opacity-100 group-hover:translate-y-0"
           >
             {/* viewer metrics */}
@@ -239,7 +219,7 @@ const FragmentCard = ({ data, style, width }) => {
                 <Heart
                   size={20}
                   strokeWidth={1.75}
-                  className={isLiked ? "fill-[#5D3FD3] stroke-[#5D3FD3]" : ""}
+                  className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : "stroke-white"}
                 />
               </button>
 
@@ -249,16 +229,13 @@ const FragmentCard = ({ data, style, width }) => {
                 <span className="text-xs text-white">...</span>
               )}
 
-              <Eye size={22} strokeWidth={1.75} />
+              <Eye size={22} strokeWidth={1.75} className="stroke-white" />
               {!loadingMetrics ? (
                 <span className="text-xs text-white">{viewCount}</span>
               ) : (
                 <span className="text-xs text-white">...</span>
               )}
             </div>
-
-            {/* share button */}
-            {/* <Share size={20} strokeWidth={1.75} /> */}
           </div>
         </div>
 
@@ -267,8 +244,6 @@ const FragmentCard = ({ data, style, width }) => {
           onClose={() => setAddToCrystalOpen(false)}
           fragmentId={fragmentId}
         />
-
-        <span className="p-2 text-sm text-white">{name}</span>
       </div>
     </div>
   );

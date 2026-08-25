@@ -67,7 +67,7 @@ const DeleteFragmentPanel = ({ fragmentId, crystalId, onClose, onDelete }) => {
             text-white
             rounded-md
             disabled:opacity-50"
-        style={{ backgroundColor: "#5D3FD3" }}
+        style={{ backgroundColor: "#6B7280" }}
         aria-label="Cancel Delete Fragment"
         title="Cancel Delete Fragment"
       >

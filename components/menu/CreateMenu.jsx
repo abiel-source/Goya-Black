@@ -29,9 +29,9 @@ const CreateMenu = ({
         aria-haspopup="menu"
         aria-expanded={isOpen}
         onClick={onToggle}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-white hover:bg-white/10 transition"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-zinc-400 hover:text-[#2D6A4F] hover:bg-[#2D6A4F]/8 transition-colors duration-150"
       >
-        <Icon className="h-6 w-6 text-white" />
+        <Icon className="h-6 w-6" />
       </button>
 
       {isOpen && (
@@ -39,17 +39,17 @@ const CreateMenu = ({
           role="menu"
           className={`
               ${menuPositionClass}
-              z-50 w-64 rounded-xl border border-[#5D3FD3]/75 bg-black
+              z-50 w-64 rounded-xl border border-[#E5E7EB] bg-white
               shadow-lg p-2
             `}
         >
-          <h1 className="block rounded-lg px-3 py-2 text-white font-semibold">
+          <h1 className="block rounded-lg px-3 py-2 text-[#111111] font-semibold text-sm">
             Create
           </h1>
           <Link
             href="/create/fragment"
             role="menuitem"
-            className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
+            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
             onClick={() => setActiveMenu(null)}
           >
             <div className="flex items-center gap-3">
@@ -68,7 +68,7 @@ const CreateMenu = ({
           <Link
             href="/create/crystal"
             role="menuitem"
-            className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-[#5D3FD3]/90"
+            className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#2D6A4F] transition-colors duration-150"
             onClick={() => setActiveMenu(null)}
           >
             <div className="flex items-center gap-3">

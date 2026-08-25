@@ -111,30 +111,25 @@ const AddToCrystalPanel = ({ fragmentId, onClose }) => {
   return (
     <section className="p-4 overflow-y-auto">
       {loadingCreatedCrystals || membershipLoading ? (
-        <div className="text-white/60 text-sm">Loading Your Crystals...</div>
+        <div className="text-zinc-400 text-sm">Loading Your Crystals...</div>
       ) : (
         <>
           {createdCrystals.length === 0 ? (
             <div className="flex flex-1 flex-col justify-center items-center">
-              <div className="text-white text-center mt-4">
+              <div className="text-[#111111] text-center mt-4">
                 No created crystals yet.
               </div>
               {myId ? (
-                <div className="text-white text-center mt-4">
+                <div className="text-zinc-500 text-center mt-4">
                   Create your first crystal now!
                 </div>
               ) : (
-                <div className="text-white text-center mt-4">
+                <div className="text-zinc-500 text-center mt-4">
                   Sign in to create your first crystal now!
                 </div>
               )}
               <div className="flex justify-center mt-8">
-                <Image
-                  src="/Crystal.svg"
-                  alt="Crystal Image"
-                  width={128}
-                  height={128}
-                />
+                <Image src="/Crystal.svg" alt="Crystal Image" width={128} height={128} />
               </div>
             </div>
           ) : (
@@ -149,34 +144,22 @@ const AddToCrystalPanel = ({ fragmentId, onClose }) => {
                       : () => handleCrystalAdd(crystal._id)
                   }
                   key={crystal._id}
-                  className="flex flex-row items-center disabled:opacity-50"
+                  className="flex flex-row items-center gap-2 w-full rounded-lg px-2 py-1.5 hover:bg-zinc-50 transition-colors duration-150 disabled:opacity-50"
                 >
                   {crystal.coverImage ? (
-                    <Image
-                      className="h-12 w-12 rounded-xl"
-                      src={crystal.coverImage}
-                      alt=""
-                      width={28}
-                      height={28}
-                    />
+                    <Image className="h-12 w-12 rounded-xl" src={crystal.coverImage} alt="" width={28} height={28} />
                   ) : (
-                    <Image
-                      className="h-12 w-12 rounded-xl"
-                      src="/Crystal.svg"
-                      alt="Crystal Image"
-                      width={28}
-                      height={28}
-                    />
+                    <Image className="h-12 w-12 rounded-xl" src="/Crystal.svg" alt="Crystal Image" width={28} height={28} />
                   )}
 
-                  <div className="rounded-lg px-3 py-2 text-white bg-white/5">
+                  <div className="flex-1 text-left text-sm text-[#111111]">
                     {crystal.name || "Untitled Crystal"}
                   </div>
 
                   {membership[crystal._id] ? (
-                    <BookmarkIconSolid className="h-4 w-4 text-white" />
+                    <BookmarkIconSolid className="h-4 w-4 text-[#2D6A4F]" />
                   ) : (
-                    <BookmarkIcon className="h-4 w-4 text-white" />
+                    <BookmarkIcon className="h-4 w-4 text-zinc-400" />
                   )}
                 </button>
               ))}

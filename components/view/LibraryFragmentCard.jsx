@@ -132,7 +132,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
   return (
     // IMPORTANT: apply masonic's positioning style
     <div style={style}>
-      <div className="flex flex-col bg-black overflow-hidden w-full">
+      <div className="flex flex-col overflow-hidden w-full">
         {/* Hover group wrapper */}
         <div
           className="relative w-full group"
@@ -192,10 +192,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
             </button>
 
             {userId && loadingSaved && (
-              <p
-                className="px-3 py-2 text-xs font-medium text-white rounded-md"
-                style={{ backgroundColor: "#5D3FD3" }}
-              >
+              <p className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F]">
                 ...
               </p>
             )}
@@ -210,7 +207,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
                 text-white
                 rounded-md
               "
-                style={{ backgroundColor: "#5D3FD3" }}
+                className="px-3 py-2 text-xs font-medium text-white rounded-md bg-[#2D6A4F] hover:bg-[#235C43] transition-colors duration-150"
                 onClick={handleToggleSave}
               >
                 {isSaved ? "Unsave" : "Save"}
@@ -232,7 +229,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
                 <Heart
                   size={20}
                   strokeWidth={1.75}
-                  className={isLiked ? "fill-[#5D3FD3] stroke-[#5D3FD3]" : ""}
+                  className={isLiked ? "fill-[#2D6A4F] stroke-[#2D6A4F]" : "stroke-white"}
                 />
               </button>
 
@@ -262,7 +259,7 @@ const LibraryFragmentCard = ({ data, style, width, handleFragmentRemoved }) => {
           onRemove={handleFragmentRemoved}
         />
 
-        <span className="p-2 text-sm text-white">{name}</span>
+        <span className="p-2 text-sm text-[#111111]">{name}</span>
       </div>
     </div>
   );

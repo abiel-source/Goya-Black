@@ -122,11 +122,11 @@ const LibraryPage = async ({ searchParams }) => {
       </h1>
 
       {/* Switch between Created & Saved */}
-      <div className="mx-auto mb-8 flex w-fit rounded-xl border border-[#5D3FD3] bg-white/5">
+      <div className="mx-auto mb-8 flex w-fit rounded-xl border border-[#E5E7EB] bg-white">
         <Link
           href={`/library?tab=created`}
           className={`rounded-lg px-4 py-2 text-sm transition ${
-            tab === "created" ? "bg-[#5D3FD3] text-white" : "text-white"
+            tab === "created" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
           }`}
         >
           Created
@@ -135,7 +135,7 @@ const LibraryPage = async ({ searchParams }) => {
         <Link
           href={`/library?tab=saved`}
           className={`rounded-lg px-6 py-2 text-sm transition ${
-            tab === "saved" ? "bg-[#5D3FD3] text-white" : "text-white"
+            tab === "saved" ? "bg-[#2D6A4F] text-white" : "text-zinc-500 hover:text-[#2D6A4F]"
           }`}
         >
           Saved
