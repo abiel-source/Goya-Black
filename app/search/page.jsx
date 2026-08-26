@@ -1,15 +1,13 @@
 import connectDB from "@/config/database";
 import { getSessionUser } from "@/utils/getSessionUser";
-import { convertToSerializeableObject } from "@/utils/convertToObject";
-
-import Crystal from "@/models/Crystal";
-import Fragment from "@/models/Fragment";
+import Gallery from "@/models/Gallery";
+import Painting from "@/models/Painting";
 
 import MasonryGallery from "@/components/view/MasonryGallery";
 import { randomBetween } from "@/utils/restructureData";
 
 import recordQuery from "@/app/actions/search/recordQuery";
-import searchFragments from "@/app/actions/search/searchPaintings";
+import searchPaintings from "@/app/actions/search/searchPaintings";
 
 export default async function SearchPage({ searchParams }) {
   await connectDB();
@@ -24,28 +22,25 @@ export default async function SearchPage({ searchParams }) {
   const params = await searchParams;
 
   const q = params.q?.trim();
-  const crystalId = params.crystal?.trim();
-  const crystalLabel = params.label?.trim();
+  const galleryId = params.gallery?.trim();
+  const galleryLabel = params.label?.trim();
 
   if (q) {
     if (q.length < 2)
       return <div>No Search Results - Try Something More Specific</div>;
 
-    ////////////////////////////////////////////////////////////
-    // Record query iff user is signed in
-    ////////////////////////////////////////////////////////////
     if (sessionUser && sessionUser.userId) {
       const { userId } = sessionUser;
       await recordQuery(userId, q);
     }
 
-    const fragments = await searchFragments(q);
-    const restructuredFragments = fragments.map((f) => {
-      const w = f?.image?.width;
-      const h = f?.image?.height;
+    const paintings = await searchPaintings(q);
+    const restructuredPaintings = paintings.map((p) => {
+      const w = p?.image?.width;
+      const h = p?.image?.height;
 
       return {
-        ...f,
+        ...p,
         ratio:
           typeof w === "number" && typeof h === "number" && h > 0
             ? w / h
@@ -54,45 +49,45 @@ export default async function SearchPage({ searchParams }) {
     });
     return (
       <>
-        {fragments.length === 0 ? (
+        {paintings.length === 0 ? (
           <h1 className="text-center text-2xl font-bold mt-10">
             No Search Results - Try Something Else!
           </h1>
         ) : (
           <>
             <p className="text-center mt-4">Search Results for "{q}"</p>
-            <MasonryGallery key={`q-${q}`} data={restructuredFragments} />
+            <MasonryGallery key={`q-${q}`} data={restructuredPaintings} />
           </>
         )}
       </>
     );
-  } else if (crystalId) {
-    const crystalDoc = await Crystal.findById(crystalId).lean();
-    if (!crystalDoc) {
+  } else if (galleryId) {
+    const galleryDoc = await Gallery.findById(galleryId).lean();
+    if (!galleryDoc) {
       return (
         <h1 className="text-center text-2xl font-bold mt-10">
-          Crystal Not Found
+          Gallery Not Found
         </h1>
       );
     }
-    const crystal = convertToSerializeableObject(crystalDoc);
-    const fragmentIDs = crystal?.images || [];
-    if (!fragmentIDs.length) {
+    const gallery = JSON.parse(JSON.stringify(galleryDoc));
+    const paintingIDs = gallery?.paintings || [];
+    if (!paintingIDs.length) {
       return (
-        <h1 className="text-center text-2xl font-bold mt-10">Empty Crystal</h1>
+        <h1 className="text-center text-2xl font-bold mt-10">Empty Gallery</h1>
       );
     }
-    const fragmentDocs = await Fragment.find({
-      _id: { $in: fragmentIDs },
+    const paintingDocs = await Painting.find({
+      _id: { $in: paintingIDs },
     }).lean();
-    const fragments = JSON.parse(JSON.stringify(fragmentDocs));
+    const paintings = JSON.parse(JSON.stringify(paintingDocs));
 
-    const restructuredFragments = fragments.map((f) => {
-      const w = f?.image?.width;
-      const h = f?.image?.height;
+    const restructuredPaintings = paintings.map((p) => {
+      const w = p?.image?.width;
+      const h = p?.image?.height;
 
       return {
-        ...f,
+        ...p,
         ratio:
           typeof w === "number" && typeof h === "number" && h > 0
             ? w / h
@@ -101,10 +96,10 @@ export default async function SearchPage({ searchParams }) {
     });
     return (
       <>
-        <p className="text-center mt-4">Showing Results for "{crystalLabel}"</p>
+        <p className="text-center mt-4">Showing Results for "{galleryLabel}"</p>
         <MasonryGallery
-          key={`crystal-${crystalId}`}
-          data={restructuredFragments}
+          key={`gallery-${galleryId}`}
+          data={restructuredPaintings}
         />
       </>
     );
