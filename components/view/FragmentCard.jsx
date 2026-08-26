@@ -12,11 +12,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import saveFragment from "@/app/actions/saveFragment";
+import saveFragment from "@/app/actions/savePainting";
 import checkSaveStatus from "@/app/actions/checkSaveStatus";
-import toggleLikeFragment from "@/app/actions/toggleLikeFragment";
+import toggleLikeFragment from "@/app/actions/toggleLikePainting";
 import checkLikeStatus from "@/app/actions/checkLikeStatus";
-import getFragmentMetrics from "@/app/actions/getFragmentMetrics";
+import getFragmentMetrics from "@/app/actions/getPaintingMetrics";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 

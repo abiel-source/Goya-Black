@@ -5,11 +5,11 @@ import User from "@/models/User";
 import { getSessionUser } from "@/utils/getSessionUser";
 import mongoose from "mongoose";
 
-async function checkSaveStatus(fragmentId) {
+async function checkSaveStatus(paintingId) {
   await connectDB();
 
-  if (!mongoose.Types.ObjectId.isValid(fragmentId)) {
-    throw new Error("Invalid fragment ID");
+  if (!mongoose.Types.ObjectId.isValid(paintingId)) {
+    throw new Error("Invalid painting ID");
   }
 
   // retrieve session user
@@ -19,17 +19,12 @@ async function checkSaveStatus(fragmentId) {
   }
   const { userId } = sessionUser;
 
-  // retrieve user from db
-  const user = await User.findById(userId);
+  const user = await User.findById(userId).select("saved.paintings");
   if (!user) {
     throw new Error("User not found");
   }
 
-  // initialize saved fragments if not defined
-  if (!user.saved) user.saved = { crystals: [], fragments: [] };
-  if (!user.saved.fragments) user.saved.fragments = [];
-
-  const isSaved = user.saved.fragments.includes(fragmentId);
+  const isSaved = user.saved.paintings.some((id) => id.toString() === paintingId.toString());
   return { isSaved };
 }
 
