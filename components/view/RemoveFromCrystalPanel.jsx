@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 
-import deleteFragmentFromCrystal from "@/app/actions/util/deleteFragmentFromCrystal";
+import deleteFragmentFromCrystal from "@/app/actions/util/removePaintingFromGallery";
 
 const RemoveFromCrystalPanel = ({
   fragmentId,
