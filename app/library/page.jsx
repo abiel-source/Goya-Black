@@ -9,10 +9,10 @@ import CrystalGrid from "@/components/view/CrystalGrid";
 import MasonryGalleryNoHover from "@/components/view/MasonryGalleryNoHover";
 import LibraryCreatedFragmentsGallery from "@/components/stateful/LibraryCreatedFragmentsGallery";
 
-import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedCrystals";
+import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedGalleries";
 import getUserCreatedFragments from "@/app/actions/library/getUserCreatedFragments";
-import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedCrystals";
-import getUserExclusiveSavedFragments from "@/app/actions/library/getUserExclusiveSavedFragments";
+import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedGalleries";
+import getUserExclusiveSavedFragments from "@/app/actions/library/getUserSavedPaintings";
 
 import CollapsibleSection from "@/components/view/CollapsibleSection";
 

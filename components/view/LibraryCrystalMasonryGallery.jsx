@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Masonry } from "masonic";
 import LibraryFragmentCard from "@/components/view/LibraryFragmentCard";
 
-import getCrystalFragments from "@/app/actions/library/getCrystalFragments";
+import getCrystalFragments from "@/app/actions/library/getGalleryPaintings";
 import SeedCrystalModal from "@/app/library/[crystalId]/SeedCrystalModal";
 
 import { Suspense } from "react"; // production build error

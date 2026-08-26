@@ -6,10 +6,10 @@ import { randomBetween } from "@/utils/restructureData";
 
 import User from "@/models/User";
 
-import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedCrystals";
+import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedGalleries";
 import getUserCreatedFragments from "@/app/actions/library/getUserCreatedFragments";
-import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedCrystals";
-import getUserExclusiveSavedFragments from "@/app/actions/library/getUserExclusiveSavedFragments";
+import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedGalleries";
+import getUserExclusiveSavedFragments from "@/app/actions/library/getUserSavedPaintings";
 
 const ProfilePage = async ({ params, searchParams }) => {
   const { profileId } = await params;
