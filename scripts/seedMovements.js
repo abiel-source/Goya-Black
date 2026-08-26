@@ -1,14 +1,28 @@
-import * as dotenv from "dotenv";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+const mongoose = require("mongoose");
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-dotenv.config({ path: resolve(__dirname, "../.env.local") });
+async function connectDB() {
+  if (mongoose.connection.readyState >= 1) return;
+  await mongoose.connect(process.env.MONGODB_URI);
+}
 
-const mongoose = (await import("mongoose")).default;
-const connectDB = (await import("../config/database.js")).default;
-const Movement = (await import("../models/Movement.js")).default;
+const MovementSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, unique: true },
+    slug: { type: String, required: true, unique: true, lowercase: true },
+    period: String,
+    description: String,
+    originCountry: String,
+    yearStart: Number,
+    yearEnd: Number,
+    regions: { type: [String], default: [] },
+    keyArtists: [{ type: mongoose.Schema.Types.ObjectId, ref: "Artist" }],
+    coverPainting: { type: mongoose.Schema.Types.ObjectId, ref: "Painting" },
+  },
+  { timestamps: true }
+);
+
+const Movement =
+  mongoose.models.Movement || mongoose.model("Movement", MovementSchema);
 
 const movements = [
   {
@@ -183,22 +197,29 @@ const movements = [
   },
 ];
 
-await connectDB();
+async function seed() {
+  await connectDB();
 
-let created = 0;
-let skipped = 0;
+  let created = 0;
+  let skipped = 0;
 
-for (const m of movements) {
-  const exists = await Movement.findOne({ slug: m.slug });
-  if (exists) {
-    console.log(`Skipped (exists): ${m.name}`);
-    skipped++;
-    continue;
+  for (const m of movements) {
+    const exists = await Movement.findOne({ slug: m.slug });
+    if (exists) {
+      console.log(`Skipped (exists): ${m.name}`);
+      skipped++;
+      continue;
+    }
+    await Movement.create(m);
+    console.log(`Created: ${m.name}`);
+    created++;
   }
-  await Movement.create(m);
-  console.log(`Created: ${m.name}`);
-  created++;
+
+  console.log(`\nDone. Created: ${created}, Skipped: ${skipped}`);
+  await mongoose.disconnect();
 }
 
-console.log(`\nDone. Created: ${created}, Skipped: ${skipped}`);
-await mongoose.disconnect();
+seed().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});
