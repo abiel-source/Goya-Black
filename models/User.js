@@ -14,29 +14,46 @@ const UserSchema = new Schema(
     image: {
       type: String,
     },
-
+    following: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    followers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        default: [],
+      },
+    ],
+    starredArtists: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Artist",
+        default: [],
+      },
+    ],
     saved: {
-      crystals: [
+      paintings: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Crystal",
+          ref: "Painting",
           default: [],
         },
       ],
-      fragments: [
+      galleries: [
         {
           type: Schema.Types.ObjectId,
-          ref: "Fragment",
+          ref: "Gallery",
           default: [],
         },
       ],
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const User = models.User || model("User", UserSchema);
-
 export default User;

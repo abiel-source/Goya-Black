@@ -31,8 +31,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Masonry } from "masonic";
 
-import getNextFragmentsPage from "@/app/actions/query/getNextFragmentsPage";
-import addFragmentsToCrystal from "@/app/actions/create/addFragmentsToCrystal";
+import getNextFragmentsPage from "@/app/actions/query/getNextPaintingsPage";
+import addFragmentsToCrystal from "@/app/actions/create/addPaintingsToGallery";
 
 import SelectableFragmentCard from "@/components/view/SelectableFragmentCard";
 

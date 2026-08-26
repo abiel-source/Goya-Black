@@ -1,46 +1,43 @@
 import { Schema, model, models } from "mongoose";
 
-// ownerId denotes the generating user (unique user)
-
-const CrystalSchema = new Schema(
+const GallerySchema = new Schema(
   {
     ownerId: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+      index: true,
     },
-
     name: {
       type: String,
       required: true,
     },
-
     description: {
       type: String,
     },
-
-    // images
-    images: [
+    paintings: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Fragment",
+        ref: "Painting",
       },
     ],
-
+    coverPainting: {
+      type: Schema.Types.ObjectId,
+      ref: "Painting",
+    },
     isFeatured: {
       type: Boolean,
       default: false,
     },
-
     isPrivate: {
       type: Boolean,
       default: false,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const Crystal = models.Crystal || model("Crystal", CrystalSchema);
+GallerySchema.index({ ownerId: 1, createdAt: -1 });
 
-export default Crystal;
+const Gallery = models.Gallery || model("Gallery", GallerySchema);
+export default Gallery;

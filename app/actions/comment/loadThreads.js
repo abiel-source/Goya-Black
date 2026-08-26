@@ -7,14 +7,14 @@ import CommentLike from "@/models/CommentLike";
 import { getSessionUser } from "@/utils/getSessionUser";
 import mongoose from "mongoose";
 
-export default async function loadThreads(fragmentId) {
+export default async function loadThreads(paintingId) {
   await connectDB();
 
-  if (!mongoose.Types.ObjectId.isValid(fragmentId)) {
-    throw new Error("Invalid fragment ID");
+  if (!mongoose.Types.ObjectId.isValid(paintingId)) {
+    throw new Error("Invalid painting ID");
   }
 
-  const threads = await Thread.find({ fragmentId, isDeleted: false })
+  const threads = await Thread.find({ paintingId, isDeleted: false })
     .sort({ lastCommentAt: -1, createdAt: -1 })
     .lean();
 
@@ -24,7 +24,7 @@ export default async function loadThreads(fragmentId) {
 
   const topComments = await Comment.find({
     threadId: { $in: threadIds },
-    fragmentId,
+    paintingId,
     kind: "top",
     isDeleted: false,
   })

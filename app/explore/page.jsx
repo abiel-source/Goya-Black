@@ -2,12 +2,12 @@ import connectDB from "@/config/database";
 
 import GridGallery from "@/components/view/GridGallery";
 
-import getFeaturedCrystals from "@/app/actions/query/getFeaturedCrystals";
+import getFeaturedGalleries from "@/app/actions/query/getFeaturedGalleries";
 
 const ExplorePage = async () => {
   await connectDB();
 
-  const crystals = await getFeaturedCrystals();
+  const galleries = await getFeaturedGalleries();
 
   const date = new Date().toLocaleDateString("en-CA", {
     year: "numeric",
@@ -17,17 +17,17 @@ const ExplorePage = async () => {
 
   return (
     <>
-      {crystals.length === 0 ? (
+      {galleries.length === 0 ? (
         <h1 className="text-center text-2xl font-bold mt-10 mb-10">
-          No Featured Crystals Today :(
+          No Featured Galleries Today :(
         </h1>
       ) : (
         <>
           <h2 className="text-center text-xl font-bold mt-10 mb-2">{date}</h2>
           <h1 className="text-center text-3xl font-bold mb-10">
-            Explore Featured Crystals
+            Explore Featured Galleries
           </h1>
-          <GridGallery data={crystals} />
+          <GridGallery data={galleries} />
         </>
       )}
     </>

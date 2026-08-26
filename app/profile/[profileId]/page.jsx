@@ -2,14 +2,12 @@ import Link from "next/link";
 import connectDB from "@/config/database";
 import CrystalGrid from "@/components/view/CrystalGrid";
 import MasonryGalleryNoHover from "@/components/view/MasonryGalleryNoHover";
-import { randomBetween } from "@/utils/restructureData";
 
 import User from "@/models/User";
 
-import getUserCreatedCrystals from "@/app/actions/library/getUserCreatedCrystals";
-import getUserCreatedFragments from "@/app/actions/library/getUserCreatedFragments";
-import getUserExclusiveSavedCrystals from "@/app/actions/library/getUserExclusiveSavedCrystals";
-import getUserExclusiveSavedFragments from "@/app/actions/library/getUserExclusiveSavedFragments";
+import getUserCreatedGalleries from "@/app/actions/library/getUserCreatedGalleries";
+import getUserExclusiveSavedGalleries from "@/app/actions/library/getUserExclusiveSavedGalleries";
+import getUserSavedPaintings from "@/app/actions/library/getUserSavedPaintings";
 
 const ProfilePage = async ({ params, searchParams }) => {
   const { profileId } = await params;
@@ -25,37 +23,9 @@ const ProfilePage = async ({ params, searchParams }) => {
   const user = JSON.parse(JSON.stringify(userDoc));
 
   // Load Content
-  const createdCrystals = await getUserCreatedCrystals(profileId);
-  const savedCrystals = await getUserExclusiveSavedCrystals(profileId);
-
-  const createdFragments = await getUserCreatedFragments(profileId);
-  const savedFragments = await getUserExclusiveSavedFragments(profileId);
-
-  const restructuredCreatedFragments = createdFragments.map((f) => {
-    const w = f?.image?.width;
-    const h = f?.image?.height;
-
-    return {
-      ...f,
-      ratio:
-        typeof w === "number" && typeof h === "number" && h > 0
-          ? w / h
-          : randomBetween(0.75, 1.8),
-    };
-  });
-
-  const restructuredSavedFragments = savedFragments.map((f) => {
-    const w = f?.image?.width;
-    const h = f?.image?.height;
-
-    return {
-      ...f,
-      ratio:
-        typeof w === "number" && typeof h === "number" && h > 0
-          ? w / h
-          : randomBetween(0.75, 1.8),
-    };
-  });
+  const createdGalleries = await getUserCreatedGalleries(profileId);
+  const savedGalleries = await getUserExclusiveSavedGalleries(profileId);
+  const savedPaintings = await getUserSavedPaintings(profileId);
 
   return (
     <div className="px-4 py-8">
@@ -83,34 +53,27 @@ const ProfilePage = async ({ params, searchParams }) => {
 
       {tab === "created" ? (
         <>
-          <h2 className="text-center font-bold mt-4">Created Crystals</h2>
-          {createdCrystals.length === 0 ? (
-            <p className="text-center mt-4">No created crystals to show</p>
+          <h2 className="text-center font-bold mt-4">Galleries</h2>
+          {createdGalleries.length === 0 ? (
+            <p className="text-center mt-4">No galleries created yet</p>
           ) : (
-            <CrystalGrid data={createdCrystals} />
-          )}
-
-          <h2 className="text-center font-bold mt-10">Created Fragments</h2>
-          {restructuredCreatedFragments.length === 0 ? (
-            <p className="text-center mt-4">No created fragments to show</p>
-          ) : (
-            <MasonryGalleryNoHover data={restructuredCreatedFragments} />
+            <CrystalGrid data={createdGalleries} />
           )}
         </>
       ) : (
         <>
-          {/* <h2 className="text-center font-bold mt-4">Saved Crystals</h2>
-          {savedCrystals.length === 0 ? (
-            <p className="text-center mt-4">No saved crystals to show</p>
+          <h2 className="text-center font-bold mt-4">Saved Galleries</h2>
+          {savedGalleries.length === 0 ? (
+            <p className="text-center mt-4">No saved galleries to show</p>
           ) : (
-            <CrystalGrid data={savedCrystals} />
-          )} */}
+            <CrystalGrid data={savedGalleries} />
+          )}
 
-          <h2 className="text-center font-bold mt-10">Saved Fragments</h2>
-          {restructuredSavedFragments.length === 0 ? (
-            <p className="text-center mt-4">No saved fragments to show</p>
+          <h2 className="text-center font-bold mt-10">Saved Paintings</h2>
+          {savedPaintings.length === 0 ? (
+            <p className="text-center mt-4">No saved paintings to show</p>
           ) : (
-            <MasonryGalleryNoHover data={restructuredSavedFragments} />
+            <MasonryGalleryNoHover data={savedPaintings} />
           )}
         </>
       )}

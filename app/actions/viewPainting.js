@@ -2,15 +2,15 @@
 
 import connectDB from "@/config/database";
 import View from "@/models/View";
-import Fragment from "@/models/Fragment";
+import Painting from "@/models/Painting";
 import { getSessionUser } from "@/utils/getSessionUser";
 import mongoose from "mongoose";
 
-async function viewFragment(fragmentId) {
+async function viewPainting(paintingId) {
   await connectDB();
 
-  if (!mongoose.Types.ObjectId.isValid(fragmentId)) {
-    throw new Error("Invalid fragment ID");
+  if (!mongoose.Types.ObjectId.isValid(paintingId)) {
+    throw new Error("Invalid painting ID");
   }
 
   const sessionUser = await getSessionUser();
@@ -20,33 +20,33 @@ async function viewFragment(fragmentId) {
   const userId = sessionUser.userId;
 
   try {
-    await View.create({ userId, fragmentId });
+    await View.create({ userId, paintingId });
 
-    const updated = await Fragment.findByIdAndUpdate(
-      fragmentId,
+    const updated = await Painting.findByIdAndUpdate(
+      paintingId,
       { $inc: { views: 1 } },
       { new: true, select: "views" }
     );
 
-    if (!updated) throw new Error("Fragment not found");
+    if (!updated) throw new Error("Painting not found");
 
     return { isViewed: true, viewCount: updated.views ?? 0 };
   } catch (e) {
     if (e?.code !== 11000) throw e;
 
     await View.updateOne(
-      { userId, fragmentId },
+      { userId, paintingId },
       {
         $set: { lastViewedAt: new Date() },
         $inc: { viewCount: 1 },
       }
     );
 
-    const fragment = await Fragment.findById(fragmentId).select("views");
-    if (!fragment) throw new Error("Fragment not found");
+    const painting = await Painting.findById(paintingId).select("views");
+    if (!painting) throw new Error("Painting not found");
 
-    return { isViewed: false, viewCount: fragment.views ?? 0 };
+    return { isViewed: false, viewCount: painting.views ?? 0 };
   }
 }
 
-export default viewFragment;
+export default viewPainting;

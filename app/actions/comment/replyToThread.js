@@ -22,12 +22,12 @@ export default async function replyToThread(threadId, text) {
   const clean = (text || "").toString().trim();
   if (!clean) throw new Error("Reply cannot be empty");
 
-  const thread = await Thread.findById(threadId).select("fragmentId");
+  const thread = await Thread.findById(threadId).select("paintingId");
   if (!thread) throw new Error("Thread not found");
 
   const reply = await Comment.create({
     threadId,
-    fragmentId: thread.fragmentId,
+    paintingId: thread.paintingId,
     userId,
     text: clean,
     kind: "reply",

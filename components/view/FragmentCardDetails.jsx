@@ -18,12 +18,12 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
-import viewFragment from "@/app/actions/viewFragment";
-import saveFragment from "@/app/actions/saveFragment";
+import viewFragment from "@/app/actions/viewPainting";
+import saveFragment from "@/app/actions/savePainting";
 import checkSaveStatus from "@/app/actions/checkSaveStatus";
-import toggleLikeFragment from "@/app/actions/toggleLikeFragment";
+import toggleLikeFragment from "@/app/actions/toggleLikePainting";
 import checkLikeStatus from "@/app/actions/checkLikeStatus";
-import getFragmentMetrics from "@/app/actions/getFragmentMetrics";
+import getFragmentMetrics from "@/app/actions/getPaintingMetrics";
 import getUserDetails from "@/app/actions/getUserDetails";
 import getThreadCount from "@/app/actions/comment/getThreadCount";
 

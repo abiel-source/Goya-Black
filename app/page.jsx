@@ -49,7 +49,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import MasonryGallery from "@/components/view/MasonryGallery";
-import getNextFragmentsPage from "@/app/actions/query/getNextFragmentsPage";
+import getNextPaintingsPage from "@/app/actions/query/getNextPaintingsPage";
 
 const PAGE_SIZE = 20;
 
@@ -76,7 +76,7 @@ const HomePage = () => {
       }
 
       try {
-        const result = await getNextFragmentsPage({
+        const result = await getNextPaintingsPage({
           cursorCreatedAt: initial ? null : cursor?.createdAt ?? null,
           cursorId: initial ? null : cursor?.id ?? null,
           limit: PAGE_SIZE,
@@ -91,7 +91,7 @@ const HomePage = () => {
         setCursor(result.nextCursor);
         setHasMore(result.hasMore);
       } catch (error) {
-        console.error("Failed to load fragments:", error);
+        console.error("Failed to load paintings:", error);
       } finally {
         if (initial) {
           setLoadingInitial(false);
@@ -134,7 +134,7 @@ const HomePage = () => {
   if (loadingInitial) {
     return (
       <h1 className="mt-10 text-center text-2xl font-bold">
-        Loading Fragments...
+        Loading Paintings...
       </h1>
     );
   }
@@ -142,7 +142,7 @@ const HomePage = () => {
   if (items.length === 0) {
     return (
       <h1 className="mt-10 text-center text-2xl font-bold">
-        Fragment Not Found
+        No Paintings Found
       </h1>
     );
   }
@@ -161,7 +161,7 @@ const HomePage = () => {
 
       {!hasMore && items.length > 0 && (
         <p className="py-6 text-center text-sm text-zinc-300">
-          No more fragments.
+          No more paintings.
         </p>
       )}
     </>

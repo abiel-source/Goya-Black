@@ -2,15 +2,15 @@
 
 import connectDB from "@/config/database";
 import Like from "@/models/Like";
-import Fragment from "@/models/Fragment";
+import Painting from "@/models/Painting";
 import { getSessionUser } from "@/utils/getSessionUser";
 import mongoose from "mongoose";
 
-async function checkLikeStatus(fragmentId) {
+async function checkLikeStatus(paintingId) {
   await connectDB();
 
-  if (!mongoose.Types.ObjectId.isValid(fragmentId)) {
-    throw new Error("Invalid fragment ID");
+  if (!mongoose.Types.ObjectId.isValid(paintingId)) {
+    throw new Error("Invalid painting ID");
   }
 
   // retrieve session user
@@ -20,20 +20,18 @@ async function checkLikeStatus(fragmentId) {
   }
   const { userId } = sessionUser;
 
-  // check existence of pair (userId, fragmentId)
-  const likeExists = await Like.exists({ userId, fragmentId });
+  const likeExists = await Like.exists({ userId, paintingId });
   const isLiked = likeExists ? true : false;
 
-  // get fragment counts
-  const fragment = await Fragment.findById(fragmentId).select("likes views");
-  if (!fragment) {
-    throw new Error("Fragment not found");
+  const painting = await Painting.findById(paintingId).select("likes views");
+  if (!painting) {
+    throw new Error("Painting not found");
   }
 
   return {
     isLiked,
-    likeCount: fragment.likes ?? 0,
-    viewCount: fragment.views ?? 0,
+    likeCount: painting.likes ?? 0,
+    viewCount: painting.views ?? 0,
   };
 }
 

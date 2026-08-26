@@ -8,11 +8,11 @@ import Image from "next/image";
 import { BookmarkIcon } from "@heroicons/react/24/outline";
 import { BookmarkIcon as BookmarkIconSolid } from "@heroicons/react/24/solid";
 
-import getCreatedCrystalsWithCover from "@/app/actions/query/getCreatedCrystalsWithCover";
-import processCrystalMembership from "@/app/actions/util/processCrystalMembership";
+import getCreatedCrystalsWithCover from "@/app/actions/query/getCreatedGalleriesWithCover";
+import processCrystalMembership from "@/app/actions/util/processGalleryMembership";
 
-import addFragmentsToCrystal from "@/app/actions/create/addFragmentsToCrystal";
-import deleteFragmentFromCrystal from "@/app/actions/util/deleteFragmentFromCrystal";
+import addFragmentsToCrystal from "@/app/actions/create/addPaintingsToGallery";
+import deleteFragmentFromCrystal from "@/app/actions/util/removePaintingFromGallery";
 
 const AddToCrystalPanel = ({ fragmentId, onClose }) => {
   const { data: session, status } = useSession();

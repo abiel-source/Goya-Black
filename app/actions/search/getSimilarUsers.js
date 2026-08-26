@@ -36,57 +36,53 @@ export default async function getSimilarUsers(userId, k = 5) {
   const userScores = new Map();
 
   // LIKE SCORE
-  // mutual user gets +1 for every mutually-liked fragment
-  const likedFragmentDocs = await Like.find({ userId: userId })
-    .select("fragmentId -_id")
+  // mutual user gets +1 for every mutually-liked painting
+  const likedPaintingDocs = await Like.find({ userId })
+    .select("paintingId -_id")
     .lean();
 
-  const likedFragmentIDs = likedFragmentDocs.map((doc) => doc.fragmentId);
+  const likedPaintingIDs = likedPaintingDocs.map((doc) => doc.paintingId);
 
   const mutualLikeUserDocs = await Like.find({
-    fragmentId: { $in: likedFragmentIDs },
+    paintingId: { $in: likedPaintingIDs },
     userId: { $ne: userId },
   })
     .select("userId -_id")
     .lean();
 
-  const mutualLikeUserIDs = mutualLikeUserDocs.map((doc) => doc.userId); // preserve duplicates
+  const mutualLikeUserIDs = mutualLikeUserDocs.map((doc) => doc.userId);
 
   for (const mutualUserID of mutualLikeUserIDs) {
     const key = mutualUserID.toString();
-    if (userScores.has(key)) {
-      userScores.set(key, userScores.get(key) + 1);
-    } else {
-      userScores.set(key, 1);
-    }
+    userScores.set(key, (userScores.get(key) || 0) + 1);
   }
 
   // SAVE SCORE
-  // mutual user gets +2 for every mutually-saved fragment
+  // mutual user gets +2 for every mutually-saved painting
   const userDoc = await User.findById(userId).lean();
   if (!userDoc) {
     throw new Error("User not found");
   }
 
-  const savedFragmentIDs = userDoc?.saved?.fragments || [];
+  const savedPaintingIDs = userDoc?.saved?.paintings || [];
 
   const mutualSaveUserDocs = await User.find({
     _id: { $ne: userId },
-    "saved.fragments": { $in: savedFragmentIDs },
+    "saved.paintings": { $in: savedPaintingIDs },
   })
-    .select("_id saved.fragments")
+    .select("_id saved.paintings")
     .lean();
 
-  const savedFragmentIdSet = new Set(
-    savedFragmentIDs.map((id) => id.toString())
+  const savedPaintingIdSet = new Set(
+    savedPaintingIDs.map((id) => id.toString())
   );
 
   for (const mutualUserDoc of mutualSaveUserDocs) {
     const mutualUserDocId = mutualUserDoc._id.toString();
-    const otherSavedFragmentIDs = mutualUserDoc?.saved?.fragments || [];
+    const otherSavedPaintingIDs = mutualUserDoc?.saved?.paintings || [];
 
-    for (const fragmentId of otherSavedFragmentIDs) {
-      if (savedFragmentIdSet.has(fragmentId.toString())) {
+    for (const paintingId of otherSavedPaintingIDs) {
+      if (savedPaintingIdSet.has(paintingId.toString())) {
         userScores.set(
           mutualUserDocId,
           (userScores.get(mutualUserDocId) || 0) + 2

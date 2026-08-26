@@ -94,7 +94,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import getFragmentSrc from "@/app/actions/query/getFragmentSrc";
+import getFragmentSrc from "@/app/actions/query/getPaintingSrc";
 
 const CrystalCardFeatured = ({ data }) => {
   const name = data?.name || "Untitled";
