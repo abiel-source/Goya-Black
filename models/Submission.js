@@ -10,7 +10,7 @@ const SubmissionSchema = new Schema(
     },
     type: {
       type: String,
-      enum: ["artist", "painting", "collection"],
+      enum: ["artist", "painting"],
       required: true,
     },
     referenceUrl: {
