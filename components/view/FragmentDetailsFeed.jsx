@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import MasonryGallery from "@/components/view/MasonryGallery";
-import getNextRelatedFragmentsPage from "@/app/actions/query/getNextRelatedFragmentsPage";
+import getNextRelatedFragmentsPage from "@/app/actions/query/getNextRelatedPaintingsPage";
 
 const PAGE_SIZE = 20;
 

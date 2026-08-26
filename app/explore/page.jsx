@@ -2,7 +2,7 @@ import connectDB from "@/config/database";
 
 import GridGallery from "@/components/view/GridGallery";
 
-import getFeaturedCrystals from "@/app/actions/query/getFeaturedCrystals";
+import getFeaturedCrystals from "@/app/actions/query/getFeaturedGalleries";
 
 const ExplorePage = async () => {
   await connectDB();

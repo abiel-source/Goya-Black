@@ -49,7 +49,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import MasonryGallery from "@/components/view/MasonryGallery";
-import getNextFragmentsPage from "@/app/actions/query/getNextFragmentsPage";
+import getNextFragmentsPage from "@/app/actions/query/getNextPaintingsPage";
 
 const PAGE_SIZE = 20;
 
