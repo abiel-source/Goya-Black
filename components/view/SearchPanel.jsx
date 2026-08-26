@@ -9,7 +9,7 @@ import { User } from "lucide-react";
 
 // search results initial state (given user meta data)
 //  ==> recommended crystals + users
-import getRecommendedCrystals from "@/app/actions/search/getRecommendedCrystals";
+import getRecommendedCrystals from "@/app/actions/search/getRecommendedGalleries";
 import getSimilarUsers from "@/app/actions/search/getSimilarUsers";
 
 // search results general state (given query)

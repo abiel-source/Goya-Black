@@ -9,7 +9,7 @@ import MasonryGallery from "@/components/view/MasonryGallery";
 import { randomBetween } from "@/utils/restructureData";
 
 import recordQuery from "@/app/actions/search/recordQuery";
-import searchFragments from "@/app/actions/search/searchFragments";
+import searchFragments from "@/app/actions/search/searchPaintings";
 
 export default async function SearchPage({ searchParams }) {
   await connectDB();
