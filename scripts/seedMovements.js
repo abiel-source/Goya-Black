@@ -1,15 +1,14 @@
 import * as dotenv from "dotenv";
-import { resolve } from "path";
+import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config({ path: resolve(__dirname, "../.env.local") });
 
-import mongoose from "mongoose";
-import connectDB from "../config/database.js";
-import Movement from "../models/Movement.js";
+const mongoose = (await import("mongoose")).default;
+const connectDB = (await import("../config/database.js")).default;
+const Movement = (await import("../models/Movement.js")).default;
 
 const movements = [
   {
@@ -113,16 +112,6 @@ const movements = [
     regions: [],
   },
   {
-    name: "American Realism",
-    slug: "american-realism",
-    period: "1865–1940",
-    description: "An American movement depicting everyday life with honest, unglamourized accuracy.",
-    originCountry: "United States",
-    yearStart: 1865,
-    yearEnd: 1940,
-    regions: ["American"],
-  },
-  {
     name: "Realism",
     slug: "realism",
     period: "1840–1880",
@@ -131,6 +120,16 @@ const movements = [
     yearStart: 1840,
     yearEnd: 1880,
     regions: [],
+  },
+  {
+    name: "American Realism",
+    slug: "american-realism",
+    period: "1865–1940",
+    description: "An American movement depicting everyday life with honest, unglamourized accuracy.",
+    originCountry: "United States",
+    yearStart: 1865,
+    yearEnd: 1940,
+    regions: ["American"],
   },
   {
     name: "Impressionism",
@@ -184,29 +183,22 @@ const movements = [
   },
 ];
 
-async function seedMovements() {
-  await connectDB();
+await connectDB();
 
-  let created = 0;
-  let skipped = 0;
+let created = 0;
+let skipped = 0;
 
-  for (const m of movements) {
-    const exists = await Movement.findOne({ slug: m.slug });
-    if (exists) {
-      console.log(`Skipped (exists): ${m.name}`);
-      skipped++;
-      continue;
-    }
-    await Movement.create(m);
-    console.log(`Created: ${m.name}`);
-    created++;
+for (const m of movements) {
+  const exists = await Movement.findOne({ slug: m.slug });
+  if (exists) {
+    console.log(`Skipped (exists): ${m.name}`);
+    skipped++;
+    continue;
   }
-
-  console.log(`\nDone. Created: ${created}, Skipped: ${skipped}`);
-  await mongoose.disconnect();
+  await Movement.create(m);
+  console.log(`Created: ${m.name}`);
+  created++;
 }
 
-seedMovements().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+console.log(`\nDone. Created: ${created}, Skipped: ${skipped}`);
+await mongoose.disconnect();
