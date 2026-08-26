@@ -22,6 +22,16 @@ const MovementSchema = new Schema(
     originCountry: {
       type: String,
     },
+    yearStart: {
+      type: Number,
+    },
+    yearEnd: {
+      type: Number,
+    },
+    regions: {
+      type: [String],
+      default: [],
+    },
     keyArtists: [
       {
         type: Schema.Types.ObjectId,
