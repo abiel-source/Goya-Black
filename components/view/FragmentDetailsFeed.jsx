@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import MasonryGallery from "@/components/view/MasonryGallery";
+import dynamic from "next/dynamic";
+const MasonryGallery = dynamic(() => import("@/components/view/MasonryGallery"), { ssr: false });
 import getNextRelatedFragmentsPage from "@/app/actions/query/getNextRelatedPaintingsPage";
 
 const PAGE_SIZE = 20;

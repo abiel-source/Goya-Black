@@ -48,8 +48,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import MasonryGallery from "@/components/view/MasonryGallery";
+import dynamic from "next/dynamic";
 import getNextPaintingsPage from "@/app/actions/query/getNextPaintingsPage";
+
+const MasonryGallery = dynamic(() => import("@/components/view/MasonryGallery"), { ssr: false });
 
 const PAGE_SIZE = 20;
 
