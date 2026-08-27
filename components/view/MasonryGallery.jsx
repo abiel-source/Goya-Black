@@ -1,9 +1,7 @@
 "use client";
 
-// incoming data (fragments) may require special restructuring -
-// see how action `getFragmentsByDate.js` handles the restructuring
-
-import { Masonry } from "masonic";
+import dynamic from "next/dynamic";
+const Masonry = dynamic(() => import("masonic").then((m) => m.Masonry), { ssr: false });
 import FragmentCard from "@/components/view/FragmentCard";
 import FragmentCardDetails from "@/components/view/FragmentCardDetails";
 
