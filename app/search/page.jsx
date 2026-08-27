@@ -3,8 +3,7 @@ import { getSessionUser } from "@/utils/getSessionUser";
 import Gallery from "@/models/Gallery";
 import Painting from "@/models/Painting";
 
-import dynamic from "next/dynamic";
-const MasonryGallery = dynamic(() => import("@/components/view/MasonryGallery"), { ssr: false });
+import MasonryGallery from "@/components/view/MasonryGallery";
 import { randomBetween } from "@/utils/restructureData";
 
 import recordQuery from "@/app/actions/search/recordQuery";
