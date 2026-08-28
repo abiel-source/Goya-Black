@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { X, Heart, Eye, Bookmark, MessageCircle, Send } from "lucide-react";
+import { X, Heart, Eye, Bookmark, MessageCircle, Send, CircleChevronUp, CircleChevronDown } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
@@ -293,15 +293,36 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     <div className="fixed inset-0 z-50 bg-black flex overflow-hidden">
 
       {/* ── Left: Metadata (desktop only) ── */}
-      <div className="hidden md:flex w-52 shrink-0 flex-col justify-center px-6 gap-2">
-        <h2 className="text-white font-semibold text-base leading-snug">{title}</h2>
-        {artistName && <p className="text-white/60 text-sm">{artistName}</p>}
-        <div className="flex flex-col gap-1.5 mt-2 text-xs text-white/50">
-          {year && <span><span className="text-white/80 font-medium">Year</span> · {year}</span>}
-          {movement && <span><span className="text-white/80 font-medium">Movement</span> · {movement}</span>}
-          {medium && <span><span className="text-white/80 font-medium">Medium</span> · {medium}</span>}
-          {dimensions && <span><span className="text-white/80 font-medium">Dimensions</span> · {dimensions}</span>}
-          {museum && <span><span className="text-white/80 font-medium">Museum</span> · {museum}</span>}
+      <div className="hidden md:flex w-56 shrink-0 relative items-center justify-start pl-5">
+        {/* Arrows — always vertically centered */}
+        <div className="flex flex-col items-center gap-7">
+          <button
+            onClick={() => advance(-1, paintingsLenRef.current)}
+            className="text-white/50 hover:text-white transition-colors"
+            aria-label="Previous painting"
+          >
+            <CircleChevronUp size={36} strokeWidth={1.5} />
+          </button>
+          <button
+            onClick={() => advance(1, paintingsLenRef.current)}
+            className="text-white/50 hover:text-white transition-colors"
+            aria-label="Next painting"
+          >
+            <CircleChevronDown size={36} strokeWidth={1.5} />
+          </button>
+        </div>
+
+        {/* Metadata — pinned to bottom-left */}
+        <div className="absolute bottom-8 left-5 right-5 flex flex-col gap-1.5">
+          <h2 className="text-white font-semibold text-sm leading-snug">{title}</h2>
+          {artistName && <p className="text-white/60 text-xs">{artistName}</p>}
+          <div className="flex flex-col gap-1 mt-1 text-xs text-white/50">
+            {year && <span><span className="text-white/80 font-medium">Year</span> · {year}</span>}
+            {movement && <span><span className="text-white/80 font-medium">Movement</span> · {movement}</span>}
+            {medium && <span><span className="text-white/80 font-medium">Medium</span> · {medium}</span>}
+            {dimensions && <span><span className="text-white/80 font-medium">Dimensions</span> · {dimensions}</span>}
+            {museum && <span><span className="text-white/80 font-medium">Museum</span> · {museum}</span>}
+          </div>
         </div>
       </div>
 
@@ -337,37 +358,42 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
           <X size={20} strokeWidth={1.75} className="stroke-white" />
         </button>
 
-        {/* Icons centered in remaining space */}
-        <div className="flex-1 flex flex-col items-center justify-center gap-7">
-          <button onClick={handleToggleLike} className="flex flex-col items-center gap-1.5">
-            <Heart
-              size={28}
-              strokeWidth={1.75}
-              className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : "stroke-white"}
-            />
-            <span className="text-white text-xs">{likeCount}</span>
-          </button>
+        {/* Icons centered in remaining space — two groups */}
+        <div className="flex-1 flex flex-col items-center justify-center gap-10">
 
-          <div className="flex flex-col items-center gap-1.5">
-            <Eye size={28} strokeWidth={1.75} className="stroke-white/60" />
-            <span className="text-white/60 text-xs">{viewCount}</span>
+          {/* Engagement */}
+          <div className="flex flex-col items-center gap-7">
+            <button onClick={handleToggleLike} className="flex flex-col items-center gap-1.5">
+              <Heart
+                size={28}
+                strokeWidth={1.75}
+                className={isLiked ? "fill-[#722F37] stroke-[#722F37]" : "stroke-white"}
+              />
+              <span className="text-white text-xs">{likeCount}</span>
+            </button>
+
+            <div className="flex flex-col items-center gap-1.5">
+              <Eye size={28} strokeWidth={1.75} className="stroke-white/60" />
+              <span className="text-white/60 text-xs">{viewCount}</span>
+            </div>
+
+            <button onClick={handleToggleSave} className="flex flex-col items-center gap-1.5">
+              <Bookmark
+                size={28}
+                strokeWidth={1.75}
+                className={isSaved ? "fill-white stroke-white" : "stroke-white"}
+              />
+            </button>
+
+            <button onClick={() => setCommentsOpen((v) => !v)} className="flex flex-col items-center gap-1.5">
+              <MessageCircle
+                size={28}
+                strokeWidth={1.75}
+                className={commentsOpen ? "stroke-[#722F37] fill-[#722F37]/20" : "stroke-white"}
+              />
+            </button>
           </div>
 
-          <button onClick={handleToggleSave} className="flex flex-col items-center gap-1.5">
-            <Bookmark
-              size={28}
-              strokeWidth={1.75}
-              className={isSaved ? "fill-white stroke-white" : "stroke-white"}
-            />
-          </button>
-
-          <button onClick={() => setCommentsOpen((v) => !v)} className="flex flex-col items-center gap-1.5">
-            <MessageCircle
-              size={28}
-              strokeWidth={1.75}
-              className={commentsOpen ? "stroke-[#722F37] fill-[#722F37]/20" : "stroke-white"}
-            />
-          </button>
         </div>
       </div>
 
