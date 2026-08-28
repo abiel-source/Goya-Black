@@ -1,5 +1,5 @@
 ﻿import Link from "next/link";
-import Image from "next/image";
+import { PenLine, LayoutGrid } from "lucide-react";
 
 const CreateMenu = ({
   title,
@@ -47,40 +47,30 @@ const CreateMenu = ({
             Create
           </h1>
           <Link
-            href="/create/fragment"
+            href="/submit"
             role="menuitem"
             className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#722F37] transition-colors duration-150"
             onClick={() => setActiveMenu(null)}
           >
             <div className="flex items-center gap-3">
               <div className="w-7 flex justify-center">
-                <Image
-                  src="/CrystalClearLogo.svg"
-                  alt="Fragment Image"
-                  width={16}
-                  height={16}
-                />
+                <PenLine size={16} strokeWidth={1.75} />
               </div>
-              <span>Create Fragment</span>
+              <span>Submit a Work</span>
             </div>
           </Link>
 
           <Link
-            href="/create/crystal"
+            href="/create/gallery"
             role="menuitem"
             className="block rounded-lg px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-100 hover:text-[#722F37] transition-colors duration-150"
             onClick={() => setActiveMenu(null)}
           >
             <div className="flex items-center gap-3">
               <div className="w-7 flex justify-center">
-                <Image
-                  src="/Crystal.svg"
-                  alt="Crystal Image"
-                  width={32}
-                  height={32}
-                />
+                <LayoutGrid size={16} strokeWidth={1.75} />
               </div>
-              <span>Create Crystal</span>
+              <span>New Gallery</span>
             </div>
           </Link>
         </div>
