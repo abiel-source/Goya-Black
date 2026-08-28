@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 const Masonry = dynamic(() => import("masonic").then((m) => m.Masonry), { ssr: false });
-import FragmentCard from "@/components/view/FragmentCard";
+import FragmentCard from "@/components/view/PaintingCard";
 import FragmentCardDetails from "@/components/view/FragmentCardDetails";
 
 const MasonryGallery = ({ data, isDetails = false }) => {
