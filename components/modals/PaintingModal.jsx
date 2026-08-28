@@ -36,6 +36,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
   const [viewCount, setViewCount] = useState(0);
 
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
   const [threads, setThreads] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [submittingComment, setSubmittingComment] = useState(false);
@@ -111,6 +112,14 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     setIsLiked(false);
     setLikeCount(painting?.likes ?? 0);
     setViewCount(painting?.views ?? 0);
+    setCommentCount(0);
+
+    (async () => {
+      try {
+        const res = await loadThreads(paintingId);
+        setCommentCount((res.rows || []).length);
+      } catch (e) { /* non-critical */ }
+    })();
 
     if (!userId) return;
     (async () => {
@@ -253,6 +262,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
       setNewComment("");
       const res = await loadThreads(paintingId);
       setThreads(res.rows || []);
+      setCommentCount((res.rows || []).length);
     } catch (e) {
       toast.error(e?.message || "Failed to post comment");
     } finally {
@@ -377,19 +387,20 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
               <span className="text-white/60 text-xs">{viewCount}</span>
             </div>
 
-            <button onClick={handleToggleSave} className="flex flex-col items-center gap-1.5">
-              <Bookmark
-                size={28}
-                strokeWidth={1.75}
-                className={isSaved ? "fill-white stroke-white" : "stroke-white"}
-              />
-            </button>
-
             <button onClick={() => setCommentsOpen((v) => !v)} className="flex flex-col items-center gap-1.5">
               <MessageCircle
                 size={28}
                 strokeWidth={1.75}
                 className={commentsOpen ? "stroke-[#722F37] fill-[#722F37]/20" : "stroke-white"}
+              />
+              <span className="text-white text-xs">{commentCount}</span>
+            </button>
+
+            <button onClick={handleToggleSave} className="flex flex-col items-center gap-1.5">
+              <Bookmark
+                size={28}
+                strokeWidth={1.75}
+                className={isSaved ? "fill-white stroke-white" : "stroke-white"}
               />
             </button>
           </div>
