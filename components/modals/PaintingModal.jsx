@@ -383,8 +383,8 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
           {/* Panel: slides in from right on desktop, up from bottom on mobile */}
           <div className="
             fixed z-40 bg-white flex flex-col shadow-2xl
-            md:right-16 md:top-0 md:bottom-0 md:w-80 md:rounded-l-2xl
             bottom-0 left-0 right-0 h-[60vh] rounded-t-2xl
+            md:left-auto md:right-16 md:top-0 md:bottom-0 md:h-auto md:w-80 md:rounded-none md:rounded-l-2xl
           ">
             <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E7EB] shrink-0">
               <span className="text-sm font-semibold text-[#111111]">Comments</span>
