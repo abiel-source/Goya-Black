@@ -386,11 +386,11 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
             bottom-0 left-0 right-0 h-[30vh] rounded-t-2xl
             md:left-auto md:right-16 md:top-[25%] md:bottom-[25%] md:h-auto md:w-80 md:rounded-l-2xl md:rounded-r-none
           ">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
-              <span className="text-sm font-semibold text-white/90">Comments</span>
-              <button onClick={() => setCommentsOpen(false)}>
+            <div className="relative flex items-center justify-center px-4 py-3 shrink-0">
+              <button onClick={() => setCommentsOpen(false)} className="absolute left-4">
                 <X size={16} strokeWidth={1.75} className="text-white/40 hover:text-white/70" />
               </button>
+              <span className="text-sm font-semibold text-white/90">Comments</span>
             </div>
 
             <div className="flex-1 overflow-y-auto px-4 py-3 space-y-5">
