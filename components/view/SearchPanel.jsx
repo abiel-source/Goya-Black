@@ -7,16 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { User } from "lucide-react";
 
-// search results initial state (given user meta data)
-//  ==> recommended crystals + users
-import getRecommendedCrystals from "@/app/actions/search/getRecommendedGalleries";
+import getRecommendedGalleries from "@/app/actions/search/getRecommendedGalleries";
 import getSimilarUsers from "@/app/actions/search/getSimilarUsers";
-
-// search results general state (given query)
-//  ==> list of k candidate queries (prediction queries)
-//  -> can either build search query db from user input (*)
-//  -> OR predict autocompletion from fragment metadata
-//  ==> render masonry gallery with recommended fragments
 import getQueryPredictions from "@/app/actions/search/getQueryPredictions";
 
 const SearchPanel = ({ query, setQuery }) => {
@@ -29,7 +21,7 @@ const SearchPanel = ({ query, setQuery }) => {
   const [predictions, setPredictions] = useState([]);
   const [loadingPredictions, setLoadingPredictions] = useState(false);
 
-  const [recommendedCrystals, setRecommendedCrystals] = useState([]);
+  const [recommendedGalleries, setRecommendedGalleries] = useState([]);
   const [similarUsers, setSimilarUsers] = useState([]);
 
   const [loadingDefaultState, setLoadingDefaultState] = useState(false);
@@ -45,20 +37,20 @@ const SearchPanel = ({ query, setQuery }) => {
       try {
         setLoadingDefaultState(true);
 
-        const [crystalsRes, usersRes] = await Promise.all([
-          getRecommendedCrystals(myId),
+        const [galleriesRes, usersRes] = await Promise.all([
+          getRecommendedGalleries(myId),
           getSimilarUsers(myId, 5),
         ]);
 
         if (!isMounted) return;
 
-        setRecommendedCrystals(crystalsRes || []);
+        setRecommendedGalleries(galleriesRes || []);
         setSimilarUsers(usersRes || []);
         setDefaultStateLoaded(true);
       } catch (e) {
         if (!isMounted) return;
         console.error("Failed to load default search state", e);
-        setRecommendedCrystals([]);
+        setRecommendedGalleries([]);
         setSimilarUsers([]);
         setDefaultStateLoaded(true);
       } finally {
@@ -108,27 +100,27 @@ const SearchPanel = ({ query, setQuery }) => {
             <div className="space-y-6">
               <section>
                 <h2 className="mb-3 text-sm font-semibold text-zinc-600 font-medium">
-                  Recommended Crystals
+                  Recommended Galleries
                 </h2>
 
-                {recommendedCrystals.length === 0 ? (
+                {recommendedGalleries.length === 0 ? (
                   <div className="text-zinc-400 text-sm">
                     {myId
-                      ? "No recommended crystals yet."
+                      ? "No recommended galleries yet."
                       : "Sign in to get recommendations."}
                   </div>
                 ) : (
                   <div className="space-y-2">
-                    {recommendedCrystals.map((crystal) => (
+                    {recommendedGalleries.map((gallery) => (
                       <Link
-                        href={`/search?crystal=${crystal._id}&label=${crystal.name}`}
-                        key={crystal._id}
+                        href={`/search?gallery=${gallery._id}&label=${gallery.name}`}
+                        key={gallery._id}
                         className="flex flex-row items-center"
                       >
-                        {crystal.coverImage && (
+                        {gallery.coverImage && (
                           <Image
                             className="h-12 w-12 rounded-xl"
-                            src={crystal.coverImage}
+                            src={gallery.coverImage}
                             alt=""
                             width={28}
                             height={28}
@@ -136,7 +128,7 @@ const SearchPanel = ({ query, setQuery }) => {
                         )}
 
                         <div className="rounded-lg px-3 py-2 text-[#111111] bg-zinc-50 hover:bg-zinc-100 rounded-lg transition-colors duration-150">
-                          {crystal.name || "Untitled Crystal"}
+                          {gallery.name || "Untitled Gallery"}
                         </div>
                       </Link>
                     ))}
