@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { Search, Settings, User, ShieldHalf } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
