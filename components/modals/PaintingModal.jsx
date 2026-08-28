@@ -382,20 +382,20 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
 
           {/* Panel: slides in from right on desktop, up from bottom on mobile */}
           <div className="
-            fixed z-40 bg-white flex flex-col shadow-2xl
-            bottom-0 left-0 right-0 h-[60vh] rounded-t-2xl
-            md:left-auto md:right-16 md:top-0 md:bottom-0 md:h-auto md:w-80 md:rounded-none md:rounded-l-2xl
+            fixed z-40 bg-zinc-900 flex flex-col shadow-2xl
+            bottom-0 left-0 right-0 h-[30vh] rounded-t-2xl
+            md:left-auto md:right-16 md:top-[25%] md:bottom-[25%] md:h-auto md:w-80 md:rounded-l-2xl md:rounded-r-none
           ">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E7EB] shrink-0">
-              <span className="text-sm font-semibold text-[#111111]">Comments</span>
+            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
+              <span className="text-sm font-semibold text-white/90">Comments</span>
               <button onClick={() => setCommentsOpen(false)}>
-                <X size={16} strokeWidth={1.75} className="text-zinc-500" />
+                <X size={16} strokeWidth={1.75} className="text-white/40 hover:text-white/70" />
               </button>
             </div>
 
             <div className="flex-1 overflow-y-auto px-4 py-3 space-y-5">
               {threads.length === 0 && (
-                <p className="text-sm text-zinc-400">No comments yet. Be the first!</p>
+                <p className="text-sm text-white/40">No comments yet. Be the first!</p>
               )}
               {threads.map(({ thread, topComment }) => {
                 const userImg = topComment?.userId?.image;
@@ -427,7 +427,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
                           {userId && (
                             <button
                               onClick={() => setReplyingTo(replyingTo === threadId ? null : threadId)}
-                              className="text-xs text-zinc-400 hover:text-[#722F37] transition-colors"
+                              className="text-xs text-white/30 hover:text-white/60 transition-colors"
                             >
                               Reply
                             </button>
@@ -443,7 +443,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
                           onChange={(e) => setReplyText(e.target.value)}
                           onKeyDown={(e) => { if (e.key === "Enter") handleSubmitReply(threadId); }}
                           placeholder="Write a reply..."
-                          className="flex-1 text-xs border border-[#E5E7EB] rounded-lg px-3 py-1.5 outline-none focus:border-[#722F37]"
+                          className="flex-1 text-xs bg-zinc-800 border border-white/10 text-white placeholder-white/30 rounded-lg px-3 py-1.5 outline-none focus:border-white/30"
                         />
                         <button
                           onClick={() => handleSubmitReply(threadId)}
@@ -459,7 +459,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
               })}
             </div>
 
-            <div className="px-4 py-3 border-t border-[#E5E7EB] shrink-0">
+            <div className="px-4 py-3 border-t border-white/10 shrink-0">
               {userId ? (
                 <div className="flex gap-2">
                   <input
@@ -468,18 +468,18 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
                     onChange={(e) => setNewComment(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") handleSubmitComment(); }}
                     placeholder="Add a comment..."
-                    className="flex-1 text-sm border border-[#E5E7EB] rounded-lg px-3 py-2 outline-none focus:border-[#722F37]"
+                    className="flex-1 text-sm bg-zinc-800 border border-white/10 text-white placeholder-white/30 rounded-lg px-3 py-2 outline-none focus:border-white/30"
                   />
                   <button
                     onClick={handleSubmitComment}
                     disabled={submittingComment}
-                    className="text-[#722F37] disabled:opacity-50"
+                    className="text-white/60 hover:text-white transition-colors disabled:opacity-30"
                   >
                     <Send size={18} strokeWidth={1.75} />
                   </button>
                 </div>
               ) : (
-                <p className="text-xs text-zinc-400 text-center">Sign in to leave a comment.</p>
+                <p className="text-xs text-white/30 text-center">Sign in to leave a comment.</p>
               )}
             </div>
           </div>
