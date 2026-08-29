@@ -17,6 +17,56 @@ import createThread from "@/app/actions/comment/createThread";
 import replyToThread from "@/app/actions/comment/replyToThread";
 
 const PAGE_SIZE = 8;
+
+const LOADING_MESSAGES = [
+  "Loading...",
+  "Fetching painting...",
+  "Retrieving data...",
+  "Almost there...",
+];
+
+const LoadingSlide = ({ onClose, advance }) => {
+  const [msgIndex, setMsgIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setMsgIndex((i) => {
+        if (i >= LOADING_MESSAGES.length - 1) return i;
+        return i + 1;
+      });
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black flex overflow-hidden">
+      <div className="hidden md:flex w-56 shrink-0 relative items-center justify-start pl-5">
+        <div className="flex flex-col items-center gap-7">
+          <button onClick={() => advance(-1)} className="text-white/50 hover:text-white transition-colors" aria-label="Previous painting">
+            <CircleChevronUp size={36} strokeWidth={1.5} />
+          </button>
+          <button onClick={() => advance(1)} className="text-white/50 hover:text-white transition-colors" aria-label="Next painting">
+            <CircleChevronDown size={36} strokeWidth={1.5} />
+          </button>
+        </div>
+      </div>
+      <div className="flex-1 flex items-center justify-center">
+        <span className="text-white/40 text-sm tracking-wide">{LOADING_MESSAGES[msgIndex]}</span>
+      </div>
+      <div className="w-16 shrink-0 flex flex-col items-center pt-5 pb-10 z-10">
+        <button onClick={onClose} className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors" aria-label="Close">
+          <X size={20} strokeWidth={1.75} className="stroke-white" />
+        </button>
+        <div className="flex-1 flex flex-col items-center justify-center gap-7 opacity-20 pointer-events-none">
+          <Heart size={28} strokeWidth={1.75} className="stroke-white" />
+          <Eye size={28} strokeWidth={1.75} className="stroke-white" />
+          <MessageCircle size={28} strokeWidth={1.75} className="stroke-white" />
+          <Bookmark size={28} strokeWidth={1.75} className="stroke-white" />
+        </div>
+      </div>
+    </div>
+  );
+};
 const SCROLL_THRESHOLD = 40;
 const SCROLL_COOLDOWN_MS = 650;
 
@@ -175,15 +225,16 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     }
   }, []);
 
-  const advance = useCallback((dir, total) => {
+  const advance = useCallback((dir) => {
     if (scrollLocked.current) return;
     scrollLocked.current = true;
     setTimeout(() => { scrollLocked.current = false; }, SCROLL_COOLDOWN_MS);
 
     setCurrentIndex((prev) => {
       const next = prev + dir;
-      if (next < 0 || next >= total) return prev;
-      if (next >= total - 2) loadMore();
+      if (next < 0) return prev;
+      // If snapping into or near an empty slot, trigger load
+      if (next >= paintingsLenRef.current - 1) loadMore();
       return next;
     });
 
@@ -191,7 +242,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     setThreads([]);
   }, [loadMore]);
 
-  // Wheel snap — use a ref for total so advance closure stays stable
+  // Ref so wheel/touch handlers always see current paintings.length without re-registering
   const paintingsLenRef = useRef(0);
   useEffect(() => { paintingsLenRef.current = paintings.length; }, [paintings.length]);
 
@@ -200,7 +251,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     const onWheel = (e) => {
       e.preventDefault();
       if (Math.abs(e.deltaY) < SCROLL_THRESHOLD) return;
-      advance(e.deltaY > 0 ? 1 : -1, paintingsLenRef.current);
+      advance(e.deltaY > 0 ? 1 : -1);
     };
     window.addEventListener("wheel", onWheel, { passive: false });
     return () => window.removeEventListener("wheel", onWheel);
@@ -213,7 +264,7 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     const onTouchEnd = (e) => {
       if (touchStartY.current === null) return;
       const delta = touchStartY.current - e.changedTouches[0].clientY;
-      if (Math.abs(delta) > 60) advance(delta > 0 ? 1 : -1, paintingsLenRef.current);
+      if (Math.abs(delta) > 60) advance(delta > 0 ? 1 : -1);
       touchStartY.current = null;
     };
     window.addEventListener("touchstart", onTouchStart);
@@ -288,7 +339,12 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
     }
   };
 
-  if (!open || !painting) return null;
+  if (!open) return null;
+
+  // Skeleton while next painting is loading
+  if (!painting) {
+    return <LoadingSlide onClose={onClose} advance={advance} />;
+  }
 
   const src = painting.image?.url || "";
   const title = painting.title || "Untitled";
@@ -307,14 +363,14 @@ const PaintingModal = ({ open, onClose, painting: initialPainting }) => {
         {/* Arrows — always vertically centered */}
         <div className="flex flex-col items-center gap-7">
           <button
-            onClick={() => advance(-1, paintingsLenRef.current)}
+            onClick={() => advance(-1)}
             className="text-white/50 hover:text-white transition-colors"
             aria-label="Previous painting"
           >
             <CircleChevronUp size={36} strokeWidth={1.5} />
           </button>
           <button
-            onClick={() => advance(1, paintingsLenRef.current)}
+            onClick={() => advance(1)}
             className="text-white/50 hover:text-white transition-colors"
             aria-label="Next painting"
           >
